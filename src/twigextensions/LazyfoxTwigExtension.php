@@ -74,7 +74,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
         $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
 
-        $classes = " --no-progress";
+        $classes = " --no-progress --transition";
 
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '">

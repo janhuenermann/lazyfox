@@ -38,6 +38,10 @@
 	opacity: 0;
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
+	filter: blur(15px);
+}
+
+.lazyfox.--transition .--placeholder {
 	transition: 300ms opacity;
 }
 
