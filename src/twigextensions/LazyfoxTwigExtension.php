@@ -67,7 +67,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         ];
     }
 
-    public function image(Asset $asset) {
+    public function image(Asset $asset, string $type) {
         echo '<img style="width: 100%;" src="' . $asset->url . '">';
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
