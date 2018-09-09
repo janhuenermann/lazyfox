@@ -81,13 +81,13 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function getBase64(Asset $asset) {
-        $thumb = $asset->copyWithTransform([
+        $thumb = [
             'mode' => 'fit',
             'width' => 160,
             'quality' => 50,
             'format' => 'jpg'
-        ]);
-        
+        ];
+
         $file = $this->getTransformFile($asset, $thumb);
         $binary = file_get_contents($file);
         // Return the string.
