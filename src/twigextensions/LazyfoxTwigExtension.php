@@ -67,7 +67,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset) {
-        echo '<img style="width: 100%;" src="' . '">';
+        echo '<img style="width: 100%;" src="' . $asset->url() . '">';
     }
 
 }
