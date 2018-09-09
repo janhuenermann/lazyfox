@@ -69,7 +69,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
     public function image(Asset $asset, array $transform = NULL) {
         if ($transform == NULL)
-            $transform = $asset->_transform;
+            $transform = $asset->transform;
 
         echo 
            '<figure class="lazyfox --not-loaded">
