@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
             lazyImage.srcset = lazyImage.dataset.srcset;
             lazyImage.src = lazyImage.dataset.src;
            	
-           	lazyImage.dataset.srcset = "";
-           	lazyImage.dataset.src = "";
+           	delete lazyImage.dataset.srcset;
+           	delete lazyImage.dataset.src;
             
             lazyImage.addEventListener('load', () => lazyImage.parentNode.classList.remove("--not-loaded"), {once: true})
 
