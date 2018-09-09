@@ -73,7 +73,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
            '<figure class="lazyfox --not-loaded">
                 <div class=lazyfox-placeholder style="padding-bottom: ' . ($asset->height / $asset->width * 100) . '%">
                 </div>
-                <img data-src="' .  $asset->getUrl() . '" src="' . $this->getBase64($asset, $transform) . '">
+                <img data-src="' .  $asset->getUrl($transform) . '" src="' . $this->getBase64($asset, $transform) . '">
             </figure>';
 
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
@@ -88,14 +88,12 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function getScaledDownTransform(Asset $asset, $transform, int $size) {
-        $assetTransforms = Craft::$app->getAssetTransforms();
-        
-
         if ($transform == NULL) {
             $transform = new AssetTransform();
             $transform->mode = 'fit';
         }
         else {
+            $assetTransforms = Craft::$app->getAssetTransforms();
             $transform = $assetTransforms->normalizeTransform($transform);
         }
 
