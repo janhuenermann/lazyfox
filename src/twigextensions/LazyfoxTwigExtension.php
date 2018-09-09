@@ -83,8 +83,8 @@ class LazyfoxTwigExtension extends \Twig_Extension
     public function getBase64(Asset $asset) {
         $thumb = [
             'mode' => 'fit',
-            'width' => 160,
-            'quality' => 50,
+            'width' => 50,
+            'quality' => 100,
             'format' => 'jpg'
         ];
 
