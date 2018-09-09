@@ -11,7 +11,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", function() {
-  let lazyImages = [].slice.call(document.querySelectorAll(".lazyfox img.--content"));
+  let lazyImages = [].slice.call(document.querySelectorAll(".lazyfox img[data-src]"));
   let active = false;
 
   const lazyLoad = function() {
@@ -27,7 +27,10 @@ document.addEventListener("DOMContentLoaded", function() {
            	delete lazyImage.dataset.srcset;
            	delete lazyImage.dataset.src;
             
-            lazyImage.addEventListener('load', () => lazyImage.parentNode.classList.remove("--not-loaded"), {once: true})
+            lazyImage.addEventListener('load', () => {
+            	lazyImage.parentNode.classList.remove("--not-loaded")
+            	lazyImage.parentNode.querySelector(".--placeholder").remove()
+            }, {once: true})
 
             lazyImages = lazyImages.filter(function(image) {
               return image !== lazyImage;
