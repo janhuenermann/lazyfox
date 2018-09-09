@@ -68,19 +68,27 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, string $type) {
+        echo '<img style="width: 100%;" src="' . $this->getBase64($asset) . '">';
+        Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
+    }
+
+    public function getTransformFile(Asset $asset, $transform) {
+        // Get the transform index model
+        $assetTransforms = Craft::$app->getAssetTransforms();
+        $index = $assetTransforms->getTransformIndex($asset, $transform);
+
+        return $assetTransforms->getTransformFilename($asset, $index);
+    }
+
+    public function getBase64(Asset $asset) {
         $thumb = $asset->copyWithTransform([
             'mode' => 'fit',
             'width' => 160,
             'quality' => 50,
             'format' => 'jpg'
         ]);
-
-        echo '<img style="width: 100%;" src="' . $this->getBase64($thumb) . '">';
-        Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
-    }
-
-    public function getBase64(Asset $asset) {
-        $file = $asset->getUrl();
+        
+        $file = $this->getTransformFile($asset, $thumb);
         $binary = file_get_contents($file);
         // Return the string.
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
