@@ -75,10 +75,10 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
 
         echo 
-           '<figure class="lazyfox --not-loaded">
+           '<picture class="lazyfox --not-loaded">
                 <div class=lazyfox-placeholder style="padding-bottom: ' . ($h / $w * 100) . '%"></div>
                 <img data-srcset="' . $srcset . '" data-src="' .  $asset->getUrl($transform) . '" src="' . $this->getBase64($asset, $transform) . '">
-            </figure>';
+            </picture>';
 
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
