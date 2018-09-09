@@ -11,6 +11,7 @@
 namespace janhuenermann\lazyfox\twigextensions;
 
 use janhuenermann\lazyfox\Lazyfox;
+use craft\web\Asset;
 
 use Craft;
 
@@ -37,7 +38,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'Lazyfox';
+        return 'LazyFox';
     }
 
     /**
@@ -49,9 +50,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return [
-            new \Twig_SimpleFilter('someFilter', [$this, 'someInternalFunction']),
-        ];
+        return [  ];
     }
 
     /**
@@ -61,24 +60,14 @@ class LazyfoxTwigExtension extends \Twig_Extension
      *
     * @return array
      */
-    public function getFunctions()
-    {
+    public function getFunctions() {
         return [
-            new \Twig_SimpleFunction('someFunction', [$this, 'someInternalFunction']),
+            new \Twig_SimpleFunction('image', [$this, 'image']),
         ];
     }
 
-    /**
-     * Our function called via Twig; it can do anything you want
-     *
-     * @param null $text
-     *
-     * @return string
-     */
-    public function someInternalFunction($text = null)
-    {
-        $result = $text . " in the way";
-
-        return $result;
+    public function image(Asset $asset) {
+        echo '<img style="width: 100%;" src="' . '">';
     }
+
 }
