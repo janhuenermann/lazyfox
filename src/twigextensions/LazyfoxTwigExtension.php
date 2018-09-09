@@ -74,8 +74,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
         echo 
            '<figure class="lazyfox --not-loaded">
-                <div class=lazyfox-placeholder style="padding-bottom: ' . ($h / $w * 100) . '%">
-                </div>
+                <div class=lazyfox-placeholder style="padding-bottom: ' . ($h / $w * 100) . '%"></div>
                 <img data-src="' .  $asset->getUrl($transform) . '" src="' . $this->getBase64($asset, $transform) . '">
             </figure>';
 
