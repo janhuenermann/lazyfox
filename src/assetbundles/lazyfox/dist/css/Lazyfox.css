@@ -39,6 +39,7 @@
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
 	filter: blur(15px);
+	transform: scale(1.2);
 }
 
 .lazyfox.--transition .--placeholder {
