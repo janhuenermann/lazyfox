@@ -36,7 +36,7 @@
 
 .lazyfox .--placeholder {
 	opacity: 0;
-	transition: 400ms opacity;
+	transition: 1000ms opacity;
 }
 
 .lazyfox.--not-loaded .--placeholder {
