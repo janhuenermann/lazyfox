@@ -79,8 +79,6 @@ class Lazyfox extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        craft()->deprecator->log("LAZYFOX", "IS WATCHING YOU");
-
         // Add in our Twig extensions
         Craft::$app->view->registerTwigExtension(new LazyfoxTwigExtension());
 
