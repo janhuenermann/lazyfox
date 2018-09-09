@@ -68,7 +68,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, string $type) {
-        echo '<img class="lazyfox --not-loaded" src="' . $this->getBase64($asset) . '">';
+        echo '<img class="lazyfox --not-loaded" style="width: 100%" src="' . $this->getBase64($asset) . '">';
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
 
