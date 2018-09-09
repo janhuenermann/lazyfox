@@ -13,6 +13,7 @@
 .lazyfox {
 	width: 300px;
 	position: relative;
+	overflow: hidden
 }
 
 .lazyfox-placeholder {
