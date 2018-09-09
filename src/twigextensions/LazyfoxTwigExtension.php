@@ -11,7 +11,7 @@
 namespace janhuenermann\lazyfox\twigextensions;
 
 use janhuenermann\lazyfox\Lazyfox;
-use craft\web\Asset;
+use craft\elements\Asset;
 
 use Craft;
 
