@@ -18,7 +18,7 @@
 	margin: 0;
 }
 
-.lazyfox-placeholder {
+.lazyfox .--sizer {
 	width: 100%;
 }
 
@@ -30,7 +30,7 @@
 	right: 0; bottom: 0;
 }
 
-.lazyfox.--not-loaded img {
+.lazyfox.--not-loaded .--placeholder {
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
 }

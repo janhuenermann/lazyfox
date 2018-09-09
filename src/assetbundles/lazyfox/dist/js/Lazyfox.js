@@ -11,7 +11,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", function() {
-  let lazyImages = [].slice.call(document.querySelectorAll(".lazyfox img"));
+  let lazyImages = [].slice.call(document.querySelectorAll(".lazyfox img.--content"));
   let active = false;
 
   const lazyLoad = function() {
