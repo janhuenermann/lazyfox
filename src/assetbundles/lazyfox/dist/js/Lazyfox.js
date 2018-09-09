@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
           if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
             lazyImage.src = lazyImage.dataset.src;
             // lazyImage.srcset = lazyImage.dataset.srcset;
-            lazyImage.classList.remove("--not-loaded");
+            
+            lazyImage.addEventListener('load', () => lazyImage.classList.remove("--not-loaded"), {once: true})
 
             lazyImages = lazyImages.filter(function(image) {
               return image !== lazyImage;
