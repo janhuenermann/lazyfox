@@ -13,6 +13,7 @@ namespace janhuenermann\lazyfox\twigextensions;
 use janhuenermann\lazyfox\Lazyfox;
 use janhuenermann\lazyfox\assetbundles\Lazyfox\LazyfoxAsset;
 use craft\elements\Asset;
+use craft\models\AssetTransform;
 
 use Craft;
 
@@ -67,10 +68,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         ];
     }
 
-    public function image(Asset $asset, array $transform = NULL) {
-        if ($transform == NULL)
-            $transform = $asset->transform;
-
+    public function image(Asset $asset, $transform = NULL) {
         echo 
            '<figure class="lazyfox --not-loaded">
                 <div class=lazyfox-placeholder style="padding-bottom: ' . ($asset->height / $asset->width * 100) . '%">
@@ -89,35 +87,36 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
     }
 
-    public function getScaledDownTransform(Asset $asset, array $_transform, int $size) {
-        if ($_transform == NULL) {
-            $_transform = [
-                'mode' => 'fit'
-            ];
+    public function getScaledDownTransform(Asset $asset, $transform, int $size) {
+        $assetTransforms = Craft::$app->getAssetTransforms();
+        $transform = $assetTransforms->normalizeTransform($transform);
+
+        if ($transform == NULL) {
+            $transform = new AssetTransform();
         }
 
-        if ($_transform['mode'] == 'fit') {
-            $_transform['width'] = $size;
+        $transform->format = 'jpg';
+        $transform->quality = 75;
+
+        if ($transform->mode == 'fit') {
+            $transform->width = $size;
         }
         else {
-            $w = $_transform['width'] ?? $_transform['height'];
-            $h = $_transform['height'] ?? $_transform['width'];
+            $w = $transform->width ?? $transform->height;
+            $h = $transform->height ?? $transform->width;
             $ratio = $w / $h;
             
             if ($ratio > 1) {
-                $_transform['width'] = $size;
-                $_transform['height'] = $size / $ratio;
+                $transform->width = $size;
+                $transform->height = $size / $ratio;
             }
             else {
-                $_transform['height'] = $size;
-                $_transform['width'] = $size * $ratio;
+                $transform->height = $size;
+                $transform->width = $size * $ratio;
             }
         }
 
-        $_transform['quality'] = 70;
-        $_transform['format'] = 'jpg';
-
-        return $_transform;
+        return $transform;
     }
 
     public function getTransformFile(Asset $asset, $transform) {
