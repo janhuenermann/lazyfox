@@ -72,24 +72,38 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $w = $asset->getWidth($transform);
         $h = $asset->getHeight($transform);
 
+        $srcset = $this->produceSourceSet([ $w / 2, $w * 3 / 4, $w ], $asset, $transform);
+
         echo 
            '<figure class="lazyfox --not-loaded">
                 <div class=lazyfox-placeholder style="padding-bottom: ' . ($h / $w * 100) . '%"></div>
-                <img data-src="' .  $asset->getUrl($transform) . '" src="' . $this->getBase64($asset, $transform) . '">
+                <img data-srcset="' . $srcset . '" data-src="' .  $asset->getUrl($transform) . '" src="' . $this->getBase64($asset, $transform) . '">
             </figure>';
 
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
 
     public function getBase64(Asset $asset, $transform) {
-        $transform = $this->getScaledDownTransform($asset, $transform, 16);
+        $transform = $this->getScaledDownTransform($transform, 16);
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
         $binary = file_get_contents($file);
         // Return as base64 string
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
     }
 
-    public function getScaledDownTransform(Asset $asset, $transform, int $size) {
+    public function produceSourceSet(array $srcset, Asset $asset, $transform) {
+        $attr = [];
+
+        foreach ($srcset as $size) {
+            $t = $this->getScaledDownTransform($transform, $size);
+            $url = $asset->getUrl($t);
+            $attr[] = $url . ' ' . $size . 'w';
+        }
+
+        return implode(', ', $attr);
+    }
+
+    public function getScaledDownTransform($transform, int $size) {
         if ($transform == NULL) {
             $transform = new AssetTransform();
             $transform->mode = 'fit';
