@@ -11,6 +11,7 @@
 namespace janhuenermann\lazyfox\twigextensions;
 
 use janhuenermann\lazyfox\Lazyfox;
+use janhuenermann\lazyfox\assetbundles\Lazyfox\LazyfoxAsset;
 use craft\elements\Asset;
 
 use Craft;
@@ -68,6 +69,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
     public function image(Asset $asset) {
         echo '<img style="width: 100%;" src="' . $asset->url . '">';
+        Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
 
 }
