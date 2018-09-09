@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
             lazyImage.addEventListener('load', () => {
             	lazyImage.parentNode.classList.remove("--not-loaded")
-            	lazyImage.parentNode.querySelector(".--placeholder").remove()
+            	setTimeout(() => lazyImage.parentNode.querySelector(".--placeholder").remove(), 500)
             }, {once: true})
 
             lazyImages = lazyImages.filter(function(image) {

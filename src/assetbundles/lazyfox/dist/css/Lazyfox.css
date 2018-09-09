@@ -34,7 +34,13 @@
 	z-index: 1;
 }
 
+.lazyfox .--placeholder {
+	opacity: 0;
+	transition: 400ms opacity;
+}
+
 .lazyfox.--not-loaded .--placeholder {
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
+	opacity: 1;
 }
