@@ -68,7 +68,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, string $type) {
-        echo '<img style="width: 100%;" src="' . $this->getBase64($asset) . '">';
+        echo '<img class="lazyfox --not-loaded" src="' . $this->getBase64($asset) . '">';
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
 
@@ -94,7 +94,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $binary = file_get_contents($file);
         // Return the string.
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
-
     }
 
 }
