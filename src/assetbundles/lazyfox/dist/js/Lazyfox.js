@@ -9,3 +9,7 @@
  * @package   Lazyfox
  * @since     0.0.1
  */
+
+document.addEventListener("DOMContentLoaded", () => {
+	
+})
