@@ -51,7 +51,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return [  ];
+        return [];
     }
 
     /**
@@ -88,7 +88,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
             'quality' => 100,
             'format' => 'jpg'
         ];
-
 
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $thumb);
         $binary = file_get_contents($file);
