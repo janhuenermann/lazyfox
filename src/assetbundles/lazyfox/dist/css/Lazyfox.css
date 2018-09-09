@@ -12,8 +12,17 @@
 
 .lazyfox {
 	width: 300px;
+	position: relative;
 }
 
-.lazyfox.--not-loaded {
+.lazyfox img {
+	position: absolute;
+	display: block;
+	width: 100%;
+	top: 0; left: 0;
+	right: 0; bottom: 0;
+}
+
+.lazyfox.--not-loaded img {
 	image-rendering: pixelated;
 }
