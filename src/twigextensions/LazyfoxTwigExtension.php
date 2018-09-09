@@ -71,6 +71,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     public function image(Asset $asset, $transform = NULL) {
         $w = $asset->getWidth($transform);
         $h = $asset->getHeight($transform);
+        $w = 100;
 
         $srcset = $this->produceSourceSet([ $w / 2, $w * 3 / 4, $w ], $asset, $transform);
 
