@@ -77,7 +77,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $assetTransforms = Craft::$app->getAssetTransforms();
         $index = $assetTransforms->getTransformIndex($asset, $transform);
 
-        return $assetTransforms->getTransformFilename($asset, $index);
+        return $assetTransforms->getTransformSubpath($asset, $index);
     }
 
     public function getBase64(Asset $asset) {
@@ -89,6 +89,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         ];
 
         $file = $this->getTransformFile($asset, $thumb);
+        return $file;
         $binary = file_get_contents($file);
         // Return the string.
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
