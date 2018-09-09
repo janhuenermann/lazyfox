@@ -1,0 +1,40 @@
+{
+    "name": "janhuenermann/lazyfox",
+    "description": "A plugin that makes lazy loading your images a breeze.",
+    "type": "craft-plugin",
+    "version": "0.0.1",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "lazyfox"
+    ],
+    "support": {
+        "docs": "https://github.com/janhuenermann/lazyfox/blob/master/README.md",
+        "issues": "https://github.com/janhuenermann/lazyfox/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Hünermann",
+            "homepage": "janhuenermann.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "janhuenermann\\lazyfox\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "lazyfox",
+        "handle": "lazyfox",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/janhuenermann/lazyfox/master/CHANGELOG.md",
+        "class": "janhuenermann\\lazyfox\\Lazyfox"
+    }
+}

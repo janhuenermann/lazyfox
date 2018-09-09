@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * lazyfox plugin for Craft CMS 3.x
+ *
+ * lazyfox Settings.twig
+ *
+ * @author    Jan Hünermann
+ * @copyright Copyright (c) 2018 Jan Hünermann
+ * @link      janhuenermann.com
+ * @package   Lazyfox
+ * @since     0.0.1
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("janhuenermann\\lazyfox\\assetbundles\\lazyfox\\LazyfoxAsset") %}
+
+{{ forms.textField({
+    label: 'Some Field',
+    instructions: 'Enter some setting here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: settings['someAttribute']})
+}}
