@@ -76,6 +76,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         // Get the transform index model
         $assetTransforms = Craft::$app->getAssetTransforms();
         $index = $assetTransforms->getTransformIndex($asset, $transform);
+        $assetTransforms->ensureTransformUrlByIndexModel($transformIndexModel);
 
         return $assetTransforms->getTransformSubpath($asset, $index);
     }
@@ -87,6 +88,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
             'quality' => 100,
             'format' => 'jpg'
         ];
+
 
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $thumb);
         $binary = file_get_contents($file);
