@@ -72,7 +72,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $w = $asset->getWidth($transform);
         $h = $asset->getHeight($transform);
 
-        $srcset = $this->produceSourceSet([$w, $w / 2], $asset, $transform);
+        $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
 
         echo 
            '<figure class="lazyfox --not-loaded">
