@@ -69,9 +69,12 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, $transform = NULL) {
+        $w = $asset->getWidth($transform);
+        $h = $asset->getHeight($transform);
+
         echo 
            '<figure class="lazyfox --not-loaded">
-                <div class=lazyfox-placeholder style="padding-bottom: ' . ($asset->height / $asset->width * 100) . '%">
+                <div class=lazyfox-placeholder style="padding-bottom: ' . ($h / $w * 100) . '%">
                 </div>
                 <img data-src="' .  $asset->getUrl($transform) . '" src="' . $this->getBase64($asset, $transform) . '">
             </figure>';
