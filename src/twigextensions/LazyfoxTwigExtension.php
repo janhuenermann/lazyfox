@@ -79,7 +79,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
 
-    public function getBase64(Asset $asset, array $transform) {
+    public function getBase64(Asset $asset, $transform) {
         $transform = $this->getScaledDownTransform($asset, $transform);
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
         $binary = file_get_contents($file);
