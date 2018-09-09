@@ -36,11 +36,11 @@
 
 .lazyfox .--placeholder {
 	opacity: 0;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: pixelated;
 	transition: 1000ms opacity;
 }
 
 .lazyfox.--not-loaded .--placeholder {
-	image-rendering: -moz-crisp-edges;
-	image-rendering: pixelated;
 	opacity: 1;
 }
