@@ -30,6 +30,10 @@
 	right: 0; bottom: 0;
 }
 
+.lazyfox.--not-loaded.--no-progress .--placeholder {
+	z-index: 1;
+}
+
 .lazyfox.--not-loaded .--placeholder {
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
