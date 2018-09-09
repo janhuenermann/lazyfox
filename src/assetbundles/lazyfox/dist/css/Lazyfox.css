@@ -9,6 +9,11 @@
  * @package   Lazyfox
  * @since     0.0.1
  */
+
+.lazyfox {
+	width: 100%;
+}
+
 .lazyfox.--not-loaded {
 	image-rendering: pixelated;
 }
