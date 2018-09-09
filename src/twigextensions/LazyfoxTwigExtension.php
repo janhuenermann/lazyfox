@@ -67,9 +67,57 @@ class LazyfoxTwigExtension extends \Twig_Extension
         ];
     }
 
-    public function image(Asset $asset, string $type) {
-        echo '<figure class="lazyfox --not-loaded"><div class=lazyfox-placeholder style="padding-bottom: ' . ($asset->height / $asset->width * 100) . '%"></div><img data-src="' .  $asset->getUrl() . '" src="' . $this->getBase64($asset) . '"></figure>';
+    public function image(Asset $asset, array $transform = NULL) {
+        if ($transform == NULL)
+            $transform = $asset->_transform;
+
+        echo 
+           '<figure class="lazyfox --not-loaded">
+                <div class=lazyfox-placeholder style="padding-bottom: ' . ($asset->height / $asset->width * 100) . '%">
+                </div>
+                <img data-src="' .  $asset->getUrl() . '" src="' . $this->getBase64($asset, $transform) . '">
+            </figure>';
+
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
+    }
+
+    public function getBase64(Asset $asset, array $transform) {
+        $transform = $this->getScaledDownTransform($asset, $transform);
+        $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
+        $binary = file_get_contents($file);
+        // Return as base64 string
+        return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
+    }
+
+    public function getScaledDownTransform(Asset $asset, array $_transform, int $size) {
+        if ($_transform == NULL) {
+            $_transform = [
+                'mode' => 'fit'
+            ];
+        }
+
+        if ($_transform['mode'] == 'fit') {
+            $_transform['width'] = $size;
+        }
+        else {
+            $w = $_transform['width'] ?? $_transform['height'];
+            $h = $_transform['height'] ?? $_transform['width'];
+            $ratio = $w / $h;
+            
+            if ($ratio > 1) {
+                $_transform['width'] = $size;
+                $_transform['height'] = $size / $ratio;
+            }
+            else {
+                $_transform['height'] = $size;
+                $_transform['width'] = $size * $ratio;
+            }
+        }
+
+        $_transform['quality'] = 70;
+        $_transform['format'] = 'jpg';
+
+        return $_transform;
     }
 
     public function getTransformFile(Asset $asset, $transform) {
@@ -79,20 +127,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $assetTransforms->ensureTransformUrlByIndexModel($index);
 
         return $assetTransforms->getTransformSubpath($asset, $index);
-    }
-
-    public function getBase64(Asset $asset) {
-        $thumb = [
-            'mode' => 'fit',
-            'width' => 16,
-            'quality' => 100,
-            'format' => 'jpg'
-        ];
-
-        $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $thumb);
-        $binary = file_get_contents($file);
-        // Return the string.
-        return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
     }
 
 }
