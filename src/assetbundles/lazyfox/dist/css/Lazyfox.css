@@ -37,7 +37,7 @@
 .lazyfox .--placeholder {
 	opacity: 0;
 	
-	filter: blur(10px);
+	filter: blur(5px);
 	transform: scale(1.1);
 }
 
