@@ -77,8 +77,8 @@ class LazyfoxTwigExtension extends \Twig_Extension
         echo 
            '<picture class="lazyfox --not-loaded">
                 <div class=--sizer style="padding-bottom: ' . ($h / $w * 100) . '%"></div>
-                <img class=--content data-srcset="' . $srcset . '" data-src="' .  $asset->getUrl($transform) . '">
                 <img class=--placeholder src="' . $this->getBase64($asset, $transform) . '">
+                <img class=--content data-srcset="' . $srcset . '" data-src="' .  $asset->getUrl($transform) . '">
             </picture>';
 
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
