@@ -89,11 +89,14 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
     public function getScaledDownTransform(Asset $asset, $transform, int $size) {
         $assetTransforms = Craft::$app->getAssetTransforms();
-        $transform = $assetTransforms->normalizeTransform($transform);
+        
 
         if ($transform == NULL) {
             $transform = new AssetTransform();
-            $transform->mode == 'fit';
+            $transform->mode = 'fit';
+        }
+        else {
+            $transform = $assetTransforms->normalizeTransform($transform);
         }
 
         $transform->format = 'jpg';
