@@ -38,7 +38,7 @@
 	opacity: 0;
 	
 	filter: blur(10px);
-	transform: scale(1.2);
+	transform: scale(1.1);
 }
 
 .lazyfox.--transition .--placeholder {
