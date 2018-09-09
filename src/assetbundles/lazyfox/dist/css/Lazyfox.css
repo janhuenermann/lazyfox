@@ -36,8 +36,16 @@
 
 .lazyfox .--placeholder {
 	opacity: 0;
+}
+
+.lazyfox.--pixelated .--placeholder {
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
+}
+
+.lazyfox.--blurred .--placeholder {
+	filter: blur(10px);
+	transform: scale(1.1);
 }
 
 .lazyfox.--transition .--placeholder {
