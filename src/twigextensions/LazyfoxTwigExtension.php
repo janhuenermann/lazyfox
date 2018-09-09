@@ -93,6 +93,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
         if ($transform == NULL) {
             $transform = new AssetTransform();
+            $transform->mode == 'fit';
         }
 
         $transform->format = 'jpg';
