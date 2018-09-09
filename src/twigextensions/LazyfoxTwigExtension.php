@@ -76,7 +76,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         // Get the transform index model
         $assetTransforms = Craft::$app->getAssetTransforms();
         $index = $assetTransforms->getTransformIndex($asset, $transform);
-        $assetTransforms->ensureTransformUrlByIndexModel($transformIndexModel);
+        $assetTransforms->ensureTransformUrlByIndexModel($index);
 
         return $assetTransforms->getTransformSubpath($asset, $index);
     }
