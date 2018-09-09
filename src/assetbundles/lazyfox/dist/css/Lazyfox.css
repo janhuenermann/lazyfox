@@ -38,7 +38,7 @@
 	opacity: 0;
 	image-rendering: -moz-crisp-edges;
 	image-rendering: pixelated;
-	transition: 1000ms opacity;
+	transition: 300ms opacity;
 }
 
 .lazyfox.--not-loaded .--placeholder {
