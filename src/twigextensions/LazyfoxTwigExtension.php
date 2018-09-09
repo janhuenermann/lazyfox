@@ -80,7 +80,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function getBase64(Asset $asset, $transform) {
-        $transform = $this->getScaledDownTransform($asset, $transform);
+        $transform = $this->getScaledDownTransform($asset, $transform, 16);
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
         $binary = file_get_contents($file);
         // Return as base64 string
