@@ -107,6 +107,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         if ($transform == NULL) {
             $transform = new AssetTransform();
             $transform->mode = 'fit';
+            $transform->quality = 100;
         }
         else {
             $assetTransforms = Craft::$app->getAssetTransforms();
@@ -114,7 +115,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
         }
 
         $transform->format = 'jpg';
-        $transform->quality = 75;
 
         if ($transform->mode == 'fit') {
             $transform->width = $size;
