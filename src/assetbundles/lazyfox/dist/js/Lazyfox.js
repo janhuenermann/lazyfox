@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
           if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
             lazyImage.srcset = lazyImage.dataset.srcset;
             lazyImage.src = lazyImage.dataset.src;
-            // lazyImage.srcset = lazyImage.dataset.srcset;
+           	
+           	lazyImage.dataset.srcset = "";
+           	lazyImage.dataset.src = "";
             
             lazyImage.addEventListener('load', () => lazyImage.parentNode.classList.remove("--not-loaded"), {once: true})
 
