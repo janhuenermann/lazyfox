@@ -30,7 +30,7 @@
 	right: 0; bottom: 0;
 }
 
-.lazyfox.--not-loaded.--no-progress .--placeholder {
+.lazyfox.--no-progress .--placeholder {
 	z-index: 1;
 }
 
