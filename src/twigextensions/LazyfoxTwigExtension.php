@@ -88,7 +88,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
             'format' => 'jpg'
         ];
 
-        $file = $asset->folder->path . $this->getTransformFile($asset, $thumb);
+        $file = $asset->folderPath . $this->getTransformFile($asset, $thumb);
         return $file;
         $binary = file_get_contents($file);
         // Return the string.
