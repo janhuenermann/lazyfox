@@ -16,5 +16,5 @@ export default function activate(lf) {
 	canvas.height = h * scale;
 	ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
 	
-	stackblur.canvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
+	stackblur.processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
 }
