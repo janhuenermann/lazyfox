@@ -322,7 +322,7 @@ function () {
     */
 var mul_table = [512, 512, 456, 512, 328, 456, 335, 512, 405, 328, 271, 456, 388, 335, 292, 512, 454, 405, 364, 328, 298, 271, 496, 456, 420, 388, 360, 335, 312, 292, 273, 512, 482, 454, 428, 405, 383, 364, 345, 328, 312, 298, 284, 271, 259, 496, 475, 456, 437, 420, 404, 388, 374, 360, 347, 335, 323, 312, 302, 292, 282, 273, 265, 512, 497, 482, 468, 454, 441, 428, 417, 405, 394, 383, 373, 364, 354, 345, 337, 328, 320, 312, 305, 298, 291, 284, 278, 271, 265, 259, 507, 496, 485, 475, 465, 456, 446, 437, 428, 420, 412, 404, 396, 388, 381, 374, 367, 360, 354, 347, 341, 335, 329, 323, 318, 312, 307, 302, 297, 292, 287, 282, 278, 273, 269, 265, 261, 512, 505, 497, 489, 482, 475, 468, 461, 454, 447, 441, 435, 428, 422, 417, 411, 405, 399, 394, 389, 383, 378, 373, 368, 364, 359, 354, 350, 345, 341, 337, 332, 328, 324, 320, 316, 312, 309, 305, 301, 298, 294, 291, 287, 284, 281, 278, 274, 271, 268, 265, 262, 259, 257, 507, 501, 496, 491, 485, 480, 475, 470, 465, 460, 456, 451, 446, 442, 437, 433, 428, 424, 420, 416, 412, 408, 404, 400, 396, 392, 388, 385, 381, 377, 374, 370, 367, 363, 360, 357, 354, 350, 347, 344, 341, 338, 335, 332, 329, 326, 323, 320, 318, 315, 312, 310, 307, 304, 302, 299, 297, 294, 292, 289, 287, 285, 282, 280, 278, 275, 273, 271, 269, 267, 265, 263, 261, 259];
 var shg_table = [9, 11, 12, 13, 13, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 17, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24];
-function image(img, canvas, radius, blurAlphaChannel) {
+function image$1(img, canvas, radius, blurAlphaChannel) {
   if (typeof img == 'string') {
     var img = document.getElementById(img);
   } else if (typeof HTMLImageElement !== 'undefined' && !img instanceof HTMLImageElement) {
@@ -735,12 +735,88 @@ function BlurStack() {
 }
 
 var radius = 20;
-function activate(image$$1) {
-  var lf = image$$1._lazyfox;
+function activate(image) {
+  var lf = image._lazyfox;
   var canvas = document.createElement('canvas');
   lf.container.insertAfter(canvas, lf.placeholder);
-  image(lf.placeholder, canvas, radius, false);
+  image$1(lf.placeholder, canvas, radius, false);
 }
+
+var lazyfox =
+/*#__PURE__*/
+function () {
+  function lazyfox(el) {
+    _classCallCheck(this, lazyfox);
+
+    this.container = el.parentNode;
+    this.placeholder = this.container.querySelector('.--placeholder');
+    this.type = this.container.dataset.type;
+    this.image = el;
+    this.sizer = image.parentNode.querySelector(".--sizer");
+    this.done = false;
+    el._lf = el.lazyfox = this;
+  }
+
+  _createClass(lazyfox, [{
+    key: "activate",
+    value: function activate$$1(autoSize) {
+      this.container.classList.add('--activated');
+      this.autoSize = autoSize;
+
+      switch (this.type) {
+        case 'blur':
+          activate(this);
+          break;
+
+        default:
+          break;
+      }
+    }
+  }, {
+    key: "present",
+    value: function present() {
+      var _this = this;
+
+      if (this.image.dataset.sizes == "auto") {
+        this.autoSize.add(this.image);
+        delete this.image.dataset.sizes;
+      } else {
+        this.image.sizes = this.image.dataset.sizes;
+        delete this.image.dataset.sizes;
+      }
+
+      this.image.srcset = this.image.dataset.srcset;
+      this.image.src = this.image.dataset.src;
+      delete this.image.dataset.srcset;
+      delete this.image.dataset.src;
+      image.addEventListener('load', function () {
+        return _this.cleanup();
+      }, {
+        once: true
+      });
+    }
+  }, {
+    key: "cleanup",
+    value: function cleanup() {
+      var _this2 = this;
+
+      if (this.done) return;
+      this.container.classList.remove("--not-loaded");
+      setTimeout(function () {
+        _this2.container.removeChild(_this2.placeholder);
+
+        _this2.container.classList.remove('--sized');
+
+        _this2.container.classList.remove('--activated');
+
+        _this2.container.removeChild(_this2.sizer);
+      }, 500);
+      this.done = true;
+    }
+  }]);
+
+  return lazyfox;
+}();
 
 /**
  * lazyfox plugin for Craft CMS
@@ -753,53 +829,16 @@ function activate(image$$1) {
  * @package   Lazyfox
  * @since     0.0.1
  */
-var lazyfox = {
-  autoSize: new autoSize()
-};
+var autoSizeInst = new autoSize();
 
 function init(image) {
-  image._lazyfox = {
-    container: image.parentNode
-  };
-  image._lazyfox.placeholder = image._lazyfox.container.querySelector('.--placeholder');
+  image._lf = new lazyfox(image);
 
-  image._lazyfox.container.classList.add('--activated');
-
-  if (image._lazyfox.container.classList.has('--blurred')) {
-    activate(image);
-  }
+  image._lf.activate(autoSizeInst);
 }
 
 function present(image) {
-  if (image.dataset.sizes == "auto") {
-    lazyfox.autoSize.add(image);
-    delete image.dataset.sizes;
-  } else {
-    image.sizes = image.dataset.sizes;
-    delete image.dataset.sizes;
-  }
-
-  image.srcset = image.dataset.srcset;
-  image.src = image.dataset.src;
-  delete image.dataset.srcset;
-  delete image.dataset.src;
-
-  function afterPresent() {
-    image.parentNode.classList.remove("--not-loaded");
-    setTimeout(function () {
-      var placeholder = image.parentNode.querySelector(".--placeholder");
-      placeholder.parentNode.removeChild(placeholder);
-      image.parentNode.classList.remove('--sized');
-      image.parentNode.classList.remove('--activated');
-      var sizer = image.parentNode.querySelector(".--sizer");
-      sizer.parentNode.removeChild(sizer);
-    }, 500);
-    image.removeEventListener('load', afterPresent);
-  }
-
-  image.addEventListener('load', afterPresent, {
-    once: true
-  });
+  image._lf.present();
 }
 
 function kickstartLazyFox() {
@@ -817,8 +856,8 @@ function kickstartLazyFox() {
     new window.MutationObserver(debounce(function () {
       for (var i = 0; i < images.length; i++) {
         // skip already observed images
-        if (images[i]._lazyfox) continue;
-        observer.observe(images[i]._lazyfox);
+        if (images[i]._lf) continue;
+        observer.observe(images[i]);
       }
     }));
   }

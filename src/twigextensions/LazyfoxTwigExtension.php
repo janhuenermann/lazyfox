@@ -114,7 +114,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $classes = " --no-progress --transition --sized --$previewType";
 
         echo 
-           '<picture class="lazyfox --not-loaded' . $classes . '">
+           '<picture class="lazyfox --not-loaded' . $classes . '" data-type="' . $previewType . '">
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
                 <img src="' . $placeholder . '" class=--placeholder>
                 <img data-sizes="auto" data-srcset="' . $srcset . '" data-src="' .  $src . '">
