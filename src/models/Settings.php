@@ -39,7 +39,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $sourceSet = [ ['size' => '40%'], ['size' => '75%'], ['size' => '100%'] ];
+    public $sourceSet = [ ['handle' => '1x', 'size' => '50%'], ['handle' => '1.5x', 'size' => '75%'], ['handle' => '2x', 'size' => '100%'] ];
 
     public $previewType = 'pixelated';
 

@@ -15,6 +15,12 @@
 
 {% import "_includes/forms" as forms %}
 
+<style>
+	#settings-sourceSet textarea {
+		font-family: monospace;
+	}
+</style>
+
 {{forms.selectField({
 	label: 'Appearance / preview type',
 	instructions: 'This is how your image will preview.',
@@ -36,6 +42,6 @@
 {{forms.editableTableField({
 	id: 'sourceSet',
 	name: 'sourceSet',
-	cols: { size: { type: 'text', heading: 'Size' } },
+	cols: { handle: { type: 'text', heading: 'Handle', placeholder: 'halfResolution' }, size: { type: 'text', heading: 'Size', placeholder: '50%' } },
 	rows: settings['sourceSet']
 })}}
