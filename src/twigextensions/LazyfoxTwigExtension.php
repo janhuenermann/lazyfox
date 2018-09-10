@@ -123,7 +123,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
 
     public function getBase64Placeholder(Asset $asset, $transform, $previewSize = 16) {
-        $transform = $this->getScaledDownTransform($transform, $previewSize);
+        $transform = $this->getScaledDownTransform($transform, $previewSize, "png");
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
         $binary = file_get_contents($file);
         // Return as base64 string
@@ -142,18 +142,20 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return implode(', ', $attr);
     }
 
-    public function getScaledDownTransform($transform, int $size) {
+    public function getScaledDownTransform($transform, int $size, $format = NULL) {
         if ($transform == NULL) {
             $transform = new AssetTransform();
             $transform->mode = 'fit';
             $transform->quality = 100;
+            $transform->format = $format;
         }
         else {
             $assetTransforms = Craft::$app->getAssetTransforms();
             $transform = $assetTransforms->normalizeTransform($transform);
         }
 
-        $transform->format = 'png';
+        if ($format !== NULL)
+            $transform->format = $format;
 
         if ($transform->mode == 'fit') {
             $transform->width = $size;
