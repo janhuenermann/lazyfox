@@ -15,7 +15,12 @@
 
 {% import "_includes/forms" as forms %}
 
-{{ forms.editableTableField({ id: 'table1', name: 'table1' }) }}
+{{forms.selectField({
+	name: 'appearance',
+	id: 'appearance',
+	options: [ 'eins', 'zwei' ],
+	values: [ 'one', 'two' ]
+})}}
 {{ forms.textField({
     label: 'Some Field',
     instructions: 'Enter some setting here.',
