@@ -514,6 +514,7 @@ var radius = 20;
 var scale = 10;
 function activate(lf) {
   var canvas = document.createElement('canvas');
+  canvas.classList.add('--placeholder');
   var ctx = canvas.getContext('2d');
   lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
   var w = lf.placeholder.naturalWidth;

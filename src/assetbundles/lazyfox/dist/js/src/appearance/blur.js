@@ -4,7 +4,9 @@ const radius = 20
 const scale = 10
 
 export default function activate(lf) {
-	let canvas = document.createElement('canvas')
+	let canvas = document.createElement('canvas');
+	canvas.classList.add('--placeholder');
+	
 	let ctx = canvas.getContext('2d');
 
 	lf.container.insertBefore(canvas, lf.placeholder.nextSibling)
