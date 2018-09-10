@@ -1,5 +1,4 @@
 // http://modernjavascript.blogspot.de/2013/08/building-better-debounce.html
-// 
 export function debounce(func) {
     // we need to save these in the closure
     var timeout, context, timestamp;
@@ -37,28 +36,3 @@ export function debounce(func) {
         }
     }
 }
-export function debounce(func) {
-    var timeout, timestamp;
-    var wait = 99;
-    var run = function() {
-        timeout = null;
-        func();
-    };
-
-    var later = function() {
-        var last = Date.now() - timestamp;
-        if (last < wait) {
-            setTimeout(later, wait - last);
-        } else {
-            (window.requestIdleCallback || run)(run);
-        }
-    };
-
-    return function() {
-        timestamp = Date.now();
-
-        if (!timeout) {
-            timeout = setTimeout(later, wait);
-        }
-    };
-};
