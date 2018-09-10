@@ -1,3 +1,5 @@
+'use strict';
+
 // http://modernjavascript.blogspot.de/2013/08/building-better-debounce.html
 function debounce(func) {
   // we need to save these in the closure
