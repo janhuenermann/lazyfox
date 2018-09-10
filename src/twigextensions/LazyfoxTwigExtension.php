@@ -92,7 +92,9 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return $arr;
     }
 
-    public function image(Asset $asset, $transform = NULL) {
+    public function generate
+
+    public function image(Asset $asset, $sources = [], $transform = NULL) {
         $settings = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings;
         $previewType = $settings->previewType;
         $previewSize = $settings->previewSize;
@@ -106,13 +108,14 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
         $sizes = $this->getSourceSet($settings, max($w, $h));
         $srcset = $this->produceSourceSet($sizes, $asset, $transform);
+        
 
         $classes = " --no-progress --transition --sized --$previewType";
 
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '">
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
-                <img src="' . $placeholder . '" class=--placeholder>
+                <source src="' . $placeholder . '" class=--placeholder>
                 <img data-sizes="auto" data-srcset="' . $srcset . '" data-src="' .  $src . '">
                 <noscript><img srcset="' . $srcset . '" src="' . $src . '"></noscript>
             </picture>';
