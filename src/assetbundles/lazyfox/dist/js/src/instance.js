@@ -18,7 +18,7 @@ export class lazyfox {
 		this.autoSize = autoSize
 
 		switch (this.type) {
-			case 'blur':
+			case 'blurred':
 				blur(this)
 				break ;
 			default:

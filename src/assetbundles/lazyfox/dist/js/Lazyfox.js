@@ -764,7 +764,7 @@ function () {
       this.autoSize = autoSize;
 
       switch (this.type) {
-        case 'blur':
+        case 'blurred':
           activate(this);
           break;
 
