@@ -43,6 +43,8 @@ class Settings extends Model
 
     public $previewType = 'pixelated';
 
+    public $previewSize = 16;
+
     // Public Methods
     // =========================================================================
 

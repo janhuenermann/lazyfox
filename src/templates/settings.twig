@@ -23,6 +23,16 @@
 	options: { 'pixelated': 'Pixelated', 'blurred': 'Blurred' },
 	value: settings['previewType']
 })}}
+
+{{forms.textField({
+	type: 'number',
+	label: 'Preview size',
+	instructions: 'This is how many pixels the preview image (that is embedded into the HTML page) should have',
+	name: 'previewSize',
+	id: 'previewSize',
+	value: settings['previewSize']
+})}}
+
 {{ forms.textField({
     label: 'Some Field',
     instructions: 'Enter some setting here.',
