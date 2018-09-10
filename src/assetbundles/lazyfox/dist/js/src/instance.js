@@ -14,16 +14,20 @@ export class lazyfox {
 	}
 
 	activate(autoSize) {
-		this.container.classList.add('--activated');
 		this.autoSize = autoSize
 
 		switch (this.type) {
 			case 'blurred':
-				blur(this)
+				blur(this).then(() => this.activationDone())
 				break ;
 			default:
+				this.activationDone()
 				break ;
 		}
+	}
+
+	activationDone () {
+		this.container.classList.add('--activated');
 	}
 
 	present() {

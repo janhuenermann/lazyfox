@@ -512,20 +512,26 @@ function BlurStack() {
 
 var radius = 10;
 function activate(lf) {
-  var canvas = document.createElement('canvas');
-  canvas.classList.add('--placeholder');
-  canvas.width = 100;
-  canvas.height = 100;
-  var ctx = canvas.getContext('2d');
-  lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
-  var w = lf.placeholder.naturalWidth;
-  var h = lf.placeholder.naturalHeight;
+  return new Promise(function (resolve, reject) {
+    var canvas = document.createElement('canvas');
+    canvas.classList.add('--placeholder');
+    canvas.width = 100;
+    canvas.height = 100;
+    var ctx = canvas.getContext('2d');
+    lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
+    var w = lf.placeholder.naturalWidth;
+    var h = lf.placeholder.naturalHeight;
 
-  if (w == 0 && h == 0) {
-    lf.placeholder.addEventListener('load', function () {
-      return draw(ctx, canvas, lf);
-    });
-  } else draw(ctx, canvas, lf);
+    if (w == 0 && h == 0) {
+      lf.placeholder.addEventListener('load', function () {
+        draw(ctx, canvas, lf);
+        resolve();
+      });
+    } else {
+      draw(ctx, canvas, lf);
+      resolve();
+    }
+  });
 }
 
 function draw(ctx, canvas, lf) {
@@ -551,22 +557,31 @@ function () {
   _createClass(lazyfox, [{
     key: "activate",
     value: function activate$$1(autoSize) {
-      this.container.classList.add('--activated');
+      var _this = this;
+
       this.autoSize = autoSize;
 
       switch (this.type) {
         case 'blurred':
-          activate(this);
+          activate(this).then(function () {
+            return _this.activationDone();
+          });
           break;
 
         default:
+          this.activationDone();
           break;
       }
     }
   }, {
+    key: "activationDone",
+    value: function activationDone() {
+      this.container.classList.add('--activated');
+    }
+  }, {
     key: "present",
     value: function present() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.image.dataset.sizes == "auto") {
         this.autoSize.add(this.image);
@@ -581,7 +596,7 @@ function () {
       delete this.image.dataset.srcset;
       delete this.image.dataset.src;
       this.image.addEventListener('load', function () {
-        return _this.cleanup();
+        return _this2.cleanup();
       }, {
         once: true
       });
@@ -589,23 +604,23 @@ function () {
   }, {
     key: "cleanup",
     value: function cleanup() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.done) return;
       this.container.classList.remove("--not-loaded");
       setTimeout(function () {
-        _this2.container.removeChild(_this2.placeholder);
+        _this3.container.removeChild(_this3.placeholder);
 
-        _this2.container.classList.remove('--sized');
+        _this3.container.classList.remove('--sized');
 
-        _this2.container.classList.remove('--activated');
+        _this3.container.classList.remove('--activated');
 
-        _this2.container.removeChild(_this2.sizer);
+        _this3.container.removeChild(_this3.sizer);
 
-        var canvas = _this2.container.getElementsByTagName('canvas');
+        var canvas = _this3.container.getElementsByTagName('canvas');
 
         for (var i = 0; i < canvas.length; i++) {
-          _this2.container.removeChild(canvas[i]);
+          _this3.container.removeChild(canvas[i]);
         }
       }, 500);
       this.done = true;

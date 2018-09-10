@@ -4,22 +4,31 @@ const radius = 10
 const scale = 10
 
 export default function activate(lf) {
-	let canvas = document.createElement('canvas');
-	canvas.classList.add('--placeholder');
-	canvas.width = 100;
-	canvas.height = 100;
+	return new Promise((resolve, reject) => {
+		let canvas = document.createElement('canvas');
+		canvas.classList.add('--placeholder');
+		canvas.width = 100;
+		canvas.height = 100;
 
-	let ctx = canvas.getContext('2d');
+		let ctx = canvas.getContext('2d');
 
-	lf.container.insertBefore(canvas, lf.placeholder.nextSibling)
+		lf.container.insertBefore(canvas, lf.placeholder.nextSibling)
 
-	let w = lf.placeholder.naturalWidth;
-	let h = lf.placeholder.naturalHeight;
+		let w = lf.placeholder.naturalWidth;
+		let h = lf.placeholder.naturalHeight;
 
-	if (w == 0 && h == 0) {
-		lf.placeholder.addEventListener('load', () => draw(ctx, canvas, lf))
-	}
-	else draw(ctx, canvas, lf)
+		if (w == 0 && h == 0) {
+			lf.placeholder.addEventListener('load', () => {
+				draw(ctx, canvas, lf)
+				resolve()
+			})
+		}
+		else {
+			draw(ctx, canvas, lf);
+			resolve()
+		}
+	})	
+	
 }
 
 function draw (ctx, canvas, lf) {
