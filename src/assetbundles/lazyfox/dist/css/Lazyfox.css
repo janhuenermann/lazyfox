@@ -55,3 +55,7 @@
 .lazyfox.--not-loaded .--placeholder {
 	opacity: 1;
 }
+
+.lazyfox noscript img {
+	z-index: 2;
+}
