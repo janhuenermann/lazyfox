@@ -12,7 +12,6 @@
 
 .lazyfox {
 	display: inline-block;
-	position: relative;
 	overflow: hidden;
 	margin: 0;
 	width: 100%;
@@ -25,6 +24,10 @@
 .lazyfox img {
 	display: block;
 	width: 100%;
+}
+
+.lazyfox.--sized {
+	position: relative;
 }
 
 .lazyfox.--sized img {
