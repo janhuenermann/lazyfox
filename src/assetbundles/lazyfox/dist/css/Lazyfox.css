@@ -58,8 +58,9 @@
 }
 
 .lazyfox.--blurred .--placeholder {
-	filter: blur(10px);
-	transform: scale(1.1);
+	filter: blur(8px);
+	transform: scale(1.03333);
+	outline: 100px solid var(--color);
 }
 
 .lazyfox.--transition .--placeholder {
