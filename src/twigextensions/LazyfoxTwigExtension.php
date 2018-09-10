@@ -83,10 +83,10 @@ class LazyfoxTwigExtension extends \Twig_Extension
                 continue;
 
             $percentage = intval(substr($row['size'], 0, -1));
-            $size = ceil($size * $percentage / 100);
+            $srcsize = ceil($size * $percentage / 100);
 
-            if ($row['minSize'] <= $size)
-                $arr[] = $size;
+            if ($row['minSize'] <= $srcsize)
+                $arr[] = $srcsize;
         }
 
         return $arr;
