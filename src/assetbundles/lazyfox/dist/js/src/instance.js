@@ -42,7 +42,7 @@ export class lazyfox {
 		delete this.image.dataset.srcset;
 		delete this.image.dataset.src;
 
-		image.addEventListener('load', () => this.cleanup(), { once: true })
+		this.image.addEventListener('load', () => this.cleanup(), { once: true })
 	}
 
 	cleanup() {
