@@ -737,7 +737,7 @@ function BlurStack() {
 var radius = 20;
 function activate(lf) {
   var canvas = document.createElement('canvas');
-  lf.container.insertAfter(canvas, lf.placeholder);
+  lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
   image(lf.placeholder, canvas, radius, false);
 }
 
