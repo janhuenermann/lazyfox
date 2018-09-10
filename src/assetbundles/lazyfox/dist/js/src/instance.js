@@ -59,7 +59,7 @@ export class lazyfox {
 
 			this.container.removeChild(this.sizer);
 
-			let canvas = this.container.getElementsByTag('canvas')
+			let canvas = this.container.getElementsByTagName('canvas')
 			for (var i = 0; i < canvas.length; i++) {
 				this.container.removeChild(canvas[i])
 			}

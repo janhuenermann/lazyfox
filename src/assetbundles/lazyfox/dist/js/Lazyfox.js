@@ -594,7 +594,7 @@ function () {
 
         _this2.container.removeChild(_this2.sizer);
 
-        var canvas = _this2.container.getElementsByTag('canvas');
+        var canvas = _this2.container.getElementsByTagName('canvas');
 
         for (var i = 0; i < canvas.length; i++) {
           _this2.container.removeChild(canvas[i]);
