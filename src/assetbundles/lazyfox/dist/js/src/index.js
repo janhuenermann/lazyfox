@@ -14,13 +14,22 @@ import { debounce } from './utils/debounce'
 import intersectionObserver from './intersectionObserver'
 import fallbackObserver from './fallbackObserver'
 import autoSize from './autoSize'
+import blur from './appearance/blur'
 
 var lazyfox = { 
 	autoSize: new autoSize() 
 }
 
+
+
 function init(image) {
-	image._lazyfox = true
+	image._lazyfox = { container: image.parentNode };
+	image._lazyfox.placeholder = image._lazyfox.container.querySelector('.--placeholder')
+
+	image._lazyfox.container.classList.add('--activated');
+
+	if (image._lazyfox.container.classList.has('--blurred')) {
+		blur(image); }
 }
 
 function present(image) {
@@ -48,6 +57,7 @@ function present(image) {
 			placeholder.parentNode.removeChild(placeholder)
 
 			image.parentNode.classList.remove('--sized')
+			image.parentNode.classList.remove('--activated');
 
 			let sizer = image.parentNode.querySelector(".--sizer")
 			sizer.parentNode.removeChild(sizer)

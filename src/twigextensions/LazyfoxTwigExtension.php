@@ -106,8 +106,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $preview = $this->getScaledDownTransform($transform, $previewSize, "png");
 
         $placeholder = $this->getBase64($asset, $preview);
-        $dominantColor = $this->getDominantColor($asset, $transform);
-
         $src = $asset->getUrl($transform);
 
         $sizes = $this->getSourceSet($settings, max($w, $h));
@@ -118,7 +116,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '">
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
-                <img src="' . $placeholder . '" style="--color: ' . $dominantColor . '" class=--placeholder>
+                <img src="' . $placeholder . '" class=--placeholder>
                 <img data-sizes="auto" data-srcset="' . $srcset . '" data-src="' .  $src . '">
                 <noscript><img srcset="' . $srcset . '" src="' . $src . '"></noscript>
             </picture>';
@@ -134,13 +132,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
     }
 
-    public function getDominantColor(Asset $asset, $transform) {
-        $path = $this->getImagePath($asset, $transform);
-        $rgb = ColorThief::getColor($path, 10);
-        $hex = rgb2hex($rgb);
-
-        return $hex;
-    }
 
     public function produceSourceSet(array $srcset, Asset $asset, $transform) {
         $attr = [];
@@ -200,8 +191,4 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return $asset->volume->rootPath . '/' . $assetTransforms->getTransformSubpath($asset, $index);
     }
 
-}
-
-function rgb2hex($rgb): string {
-    return '#' . sprintf('%02x', $rgb[0]) . sprintf('%02x', $rgb[1]) . sprintf('%02x', $rgb[2]);
 }

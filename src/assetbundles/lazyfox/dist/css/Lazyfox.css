@@ -36,7 +36,7 @@
 	position: relative;
 }
 
-.lazyfox.--sized img {
+.lazyfox.--sized img, .lazyfox canvas {
 	position: absolute;
 	top: 0; left: 0;
 	right: 0; bottom: 0;
@@ -58,9 +58,10 @@
 }
 
 .lazyfox.--blurred .--placeholder {
-	filter: blur(8px);
-	transform: scale(1.03333);
-	outline: 100px solid var(--color);
+}
+
+.lazyfox.--blurred.--activated .--placeholder {
+	display: none;
 }
 
 .lazyfox.--transition .--placeholder {
