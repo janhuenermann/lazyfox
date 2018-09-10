@@ -16,6 +16,7 @@ use craft\elements\Asset;
 use craft\models\AssetTransform;
 
 use Craft;
+use ColorThief\ColorThief;
 
 /**
  * Twig can be extended in many ways; you can add extra tags, filters, tests, operators,
@@ -102,7 +103,11 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $h = $asset->getHeight($transform);
 
         $padding = $h / $w * 100;
-        $placeholder = $this->getBase64Placeholder($asset, $transform, $previewSize);
+        $preview = $this->getScaledDownTransform($transform, $previewSize, "png");
+
+        $placeholder = $this->getBase64($asset, $preview);
+        $dominantColor = $this->getDominantColor($asset, $transform);
+
         $src = $asset->getUrl($transform);
 
         $sizes = $this->getSourceSet($settings, max($w, $h));
@@ -113,7 +118,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '">
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
-                <img src="' . $placeholder . '" class=--placeholder>
+                <img src="' . $placeholder . '" style="--color: ' . $dominantColor . '" class=--placeholder>
                 <img data-sizes="auto" data-srcset="' . $srcset . '" data-src="' .  $src . '">
                 <noscript><img srcset="' . $srcset . '" src="' . $src . '"></noscript>
             </picture>';
@@ -122,12 +127,19 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
 
-    public function getBase64Placeholder(Asset $asset, $transform, $previewSize = 16) {
-        $transform = $this->getScaledDownTransform($transform, $previewSize, "png");
-        $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
-        $binary = file_get_contents($file);
+    public function getBase64(Asset $asset, $transform) {
+        $path = $this->getImagePath($asset, $transform);
+        $binary = file_get_contents($path);
         // Return as base64 string
         return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
+    }
+
+    public function getDominantColor(Asset $asset, $transform) {
+        $path = $this->getImagePath($asset, $transform);
+        $rgb = ColorThief::getColor($path, 10);
+        $hex = rgb2hex($rgb);
+
+        return $hex;
     }
 
     public function produceSourceSet(array $srcset, Asset $asset, $transform) {
@@ -178,14 +190,18 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return $transform;
     }
 
-    public function getTransformFile(Asset $asset, $transform) {
+    public function getImagePath(Asset $asset, $transform) {
         // Get the transform index model
         $assetTransforms = Craft::$app->getAssetTransforms();
         $index = $assetTransforms->getTransformIndex($asset, $transform);
         // generate image if necessary
         $assetTransforms->ensureTransformUrlByIndexModel($index);
 
-        return $assetTransforms->getTransformSubpath($asset, $index);
+        return $asset->volume->rootPath . '/' . $assetTransforms->getTransformSubpath($asset, $index);
     }
 
+}
+
+function rgb2hex($rgb): string {
+    return '#' . sprintf('%02x', $rgb[0]) . sprintf('%02x', $rgb[1]) . sprintf('%02x', $rgb[2]);
 }
