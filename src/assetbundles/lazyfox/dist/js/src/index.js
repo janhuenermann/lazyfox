@@ -13,30 +13,36 @@
 import { debounce } from './utils/debounce'
 import intersectionObserver from './intersectionObserver'
 import fallbackObserver from './fallbackObserver'
+import autoSize from './autoSize'
 
-function initImage(image) {
+function init(image) {
 	image._lazyfox = true
 }
 
-function loadImage(image) {
+
+function present(image) {
+	if (image.dataset.sizes == "auto") {
+		autoSize(image)
+	}
+
 	image.srcset = image.dataset.srcset;
 	image.src = image.dataset.src;
 
 	delete image.dataset.srcset;
 	delete image.dataset.src;
 
-	function afterLoadImage() {
+	function afterPresent() {
 		image.parentNode.classList.remove("--not-loaded")
-		
+
 		setTimeout(() => {
 			let placeholder = image.parentNode.querySelector(".--placeholder")
 			placeholder.parentNode.removeChild(placeholder)
 		}, 500)
 
-		image.removeEventListener('load', afterLoadImage)
+		image.removeEventListener('load', afterPresent)
 	} 
 
-	image.addEventListener('load', afterLoadImage, { once: true })
+	image.addEventListener('load', afterPresent, { once: true })
 }
 
 
@@ -47,10 +53,10 @@ function kickstartLazyFox() {
 	let observer = null
 
 	if (intersectionObserver.isSupported()) {
-		observer = new intersectionObserver(imagesArr, initImage, loadImage)
+		observer = new intersectionObserver(imagesArr, init, present)
 	}
 	else {
-		observer = new fallbackObserver(imagesArr, initImage, loadImage)
+		observer = new fallbackObserver(imagesArr, init, present)
 	}
 
 	if (window.MutationObserver) {
