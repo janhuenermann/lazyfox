@@ -153,7 +153,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
             $transform = $assetTransforms->normalizeTransform($transform);
         }
 
-        $transform->format = 'jpg';
+        $transform->format = 'png';
 
         if ($transform->mode == 'fit') {
             $transform->width = $size;
