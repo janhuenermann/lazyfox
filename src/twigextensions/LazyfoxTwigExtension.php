@@ -114,7 +114,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '">
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
-                <source src="' . $placeholder . '" class=--placeholder>
+                <img src="' . $placeholder . '" class=--placeholder>
                 <img data-sizes="auto" data-srcset="' . $srcset . '" data-src="' .  $src . '">
                 <noscript><img srcset="' . $srcset . '" src="' . $src . '"></noscript>
             </picture>';
