@@ -70,7 +70,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, $transform = NULL) {
-        $previewType = janhuenermann\lazyfox\Lazyfox::getInstance()->settings->previewType;
+        $previewType = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings->previewType;
         $w = $asset->getWidth($transform);
         $h = $asset->getHeight($transform);
 
