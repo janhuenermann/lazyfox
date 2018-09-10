@@ -222,10 +222,10 @@ function () {
   _createClass(autoSize, [{
     key: "add",
     value: function add(el) {
-      var sources = [image];
+      var sources = [el];
 
-      if (image.parentNode.tagName == "picture") {
-        sources = sources.concat(image.getElementsByTagName("source"));
+      if (el.parentNode.tagName == "picture") {
+        sources = sources.concat(el.getElementsByTagName("source"));
       }
 
       el._imageSources = sources; // initial set
@@ -241,7 +241,7 @@ function () {
   }, {
     key: "update",
     value: function update(el, width) {
-      width = width || autoSize.getOffsetWidth(image);
+      width = width || autoSize.getOffsetWidth(el);
 
       for (var i = 0; i < el._imageSources.length; i++) {
         el._imageSources[i].setAttribute("sizes", width + "px");

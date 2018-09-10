@@ -23,9 +23,9 @@ export default class autoSize {
 	}
 
 	add (el) {
-		let sources = [ image ];
-		if (image.parentNode.tagName == "picture") {
-			sources = sources.concat(image.getElementsByTagName("source"));
+		let sources = [ el ];
+		if (el.parentNode.tagName == "picture") {
+			sources = sources.concat(el.getElementsByTagName("source"));
 		}
 		
 		el._imageSources = sources;	
@@ -41,7 +41,7 @@ export default class autoSize {
 	}
 
 	update (el, width) {
-		width = width || autoSize.getOffsetWidth(image);
+		width = width || autoSize.getOffsetWidth(el);
 		for (var i = 0; i < el._imageSources.length; i++) {
 			el._imageSources[i].setAttribute("sizes", width + "px")
 		}
