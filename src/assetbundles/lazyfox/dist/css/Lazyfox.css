@@ -60,7 +60,7 @@
 .lazyfox.--blurred .--placeholder {
 }
 
-.lazyfox.--blurred.--activated .--placeholder {
+.lazyfox.--blurred.--activated img.--placeholder {
 	display: none;
 }
 
