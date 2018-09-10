@@ -42,8 +42,7 @@
 {{forms.editableTableField({
 	id: 'sourceSet',
 	label: 'Source set',
-	instructions: "The source set determines how many versions and sizes LazyFox should generate and ship in the imgsrc attribute. The more sizes the browser has available to choose from, the more likely it is that it can load an image that is more or less the size of the actual screen size the image is shown on. But more sizes, also mean more storage on the server-side.
-	For example, on a mobile phone there are less pixels, so the browser doesn't need a super high-res image. But on a desktop, it may need a higher resolution. This table determines which sizes LazyFox should generate. ",
+	instructions: "The source set determines how many versions and sizes LazyFox should generate and ship in the imgsrc attribute. The more sizes the browser has available to choose from, the more likely it is that it can load an image that is more or less the size of the actual screen size the image is shown on. But more sizes, also mean more storage on the server-side. <br>For example, on a mobile phone there are less pixels, so the browser doesn't need a super high-res image. But on a desktop, it may need a higher resolution. This table determines which sizes LazyFox should generate. ",
 	name: 'sourceSet',
 	cols: { handle: { type: 'text', heading: 'Handle', placeholder: 'halfResolution' }, size: { type: 'text', heading: 'Size', placeholder: '50%', info: 'You can use Twig.' } },
 	rows: settings['sourceSet']
