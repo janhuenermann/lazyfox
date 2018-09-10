@@ -58,8 +58,16 @@
 }
 
 .lazyfox.--blurred .--placeholder {
-	filter: blur(10px);
+	filter: blur(4px);
 	transform: scale(1.1);
+}
+
+.lazyfox.--not-loaded.--blurred .--placeholder {
+	filter: blur(12px);
+}
+
+.lazyfox.--transition.--blurred .--placeholder {
+	transition: 300ms opacity, 300ms filter;
 }
 
 .lazyfox.--transition .--placeholder {
