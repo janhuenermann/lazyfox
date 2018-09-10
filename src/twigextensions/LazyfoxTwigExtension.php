@@ -93,7 +93,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
 
-    public function image(Asset $asset, $sources = [], $transform = NULL) {
+    public function image(Asset $asset, $transform = NULL) {
         $settings = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings;
         $previewType = $settings->previewType;
         $previewSize = $settings->previewSize;
@@ -107,7 +107,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
 
         $sizes = $this->getSourceSet($settings, max($w, $h));
         $srcset = $this->produceSourceSet($sizes, $asset, $transform);
-        
 
         $classes = " --no-progress --transition --sized --$previewType";
 
@@ -181,6 +180,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         // Get the transform index model
         $assetTransforms = Craft::$app->getAssetTransforms();
         $index = $assetTransforms->getTransformIndex($asset, $transform);
+        // generate image if necessary
         $assetTransforms->ensureTransformUrlByIndexModel($index);
 
         return $assetTransforms->getTransformSubpath($asset, $index);
