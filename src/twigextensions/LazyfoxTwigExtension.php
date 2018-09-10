@@ -92,7 +92,6 @@ class LazyfoxTwigExtension extends \Twig_Extension
         return $arr;
     }
 
-    public function generate
 
     public function image(Asset $asset, $sources = [], $transform = NULL) {
         $settings = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings;
