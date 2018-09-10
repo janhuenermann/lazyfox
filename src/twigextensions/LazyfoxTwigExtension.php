@@ -147,7 +147,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
             $transform = new AssetTransform();
             $transform->mode = 'fit';
             $transform->quality = 100;
-            $transform->format = $format;
+            $transform->format = 'jpg';
         }
         else {
             $assetTransforms = Craft::$app->getAssetTransforms();
