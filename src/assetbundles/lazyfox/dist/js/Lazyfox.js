@@ -120,7 +120,7 @@ var _class$1 = function () {
   }, {
     key: "observe",
     value: function observe(element) {
-      if (this.init) this.init(el);
+      if (this.init) this.init(element);
 
       this._elements.push(element);
 

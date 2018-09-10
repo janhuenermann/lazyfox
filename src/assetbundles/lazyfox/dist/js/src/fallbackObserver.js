@@ -37,7 +37,7 @@ export default class {
 	}
 
 	observe(element) {
-		if (this.init) this.init(el)
+		if (this.init) this.init(element)
 		this._elements.push(element)
 
 		if (this._elements.length === 1) {
