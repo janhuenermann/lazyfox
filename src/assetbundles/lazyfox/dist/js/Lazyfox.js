@@ -514,18 +514,23 @@ var radius = 20;
 function activate(lf) {
   var canvas = document.createElement('canvas');
   canvas.classList.add('--placeholder');
+  canvas.width = 100;
+  canvas.height = 100;
   var ctx = canvas.getContext('2d');
   lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
-  lf.placeholder.addEventListener('load', function () {
-    var w = lf.placeholder.naturalWidth;
-    var h = lf.placeholder.naturalHeight;
-    canvas.width = 100;
-    canvas.height = 100;
-    ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
-    processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
-  }, {
-    once: true
-  });
+  var w = lf.placeholder.naturalWidth;
+  var h = lf.placeholder.naturalHeight;
+
+  if (w == 0 && h == 0) {
+    lf.placeholder.addEventListener('load', function () {
+      return draw(ctx, canvas, lf);
+    });
+  } else draw(ctx, canvas, lf);
+}
+
+function draw(ctx, canvas, lf) {
+  ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
+  processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
 }
 
 var lazyfox =
@@ -634,7 +639,7 @@ function present(image) {
 }
 
 function kickstartLazyFox() {
-  var images = document.querySelectorAll(".lazyfox img[data-src]");
+  var images = document.querySelectorAll("picture.lazyfox img[data-src]");
   var imagesArr = [].slice.call(images);
   var observer = null;
 

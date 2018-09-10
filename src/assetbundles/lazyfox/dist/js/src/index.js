@@ -28,7 +28,7 @@ function present(image) {
 }
 
 function kickstartLazyFox() {
-	let images = document.querySelectorAll(".lazyfox img[data-src]")
+	let images = document.querySelectorAll("picture.lazyfox img[data-src]")
 	let imagesArr = [].slice.call(images)
 	let observer = null
 
