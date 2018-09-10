@@ -25,7 +25,13 @@ function init(image) {
 
 function present(image) {
 	if (image.dataset.sizes == "auto") {
-		lazyfox.autoSize.add(image)
+		lazyfox.autoSize.add(image);
+		delete image.dataset.sizes;
+	}
+
+	else {
+		image.sizes = image.dataset.sizes;
+		delete image.dataset.sizes;
 	}
 
 	image.srcset = image.dataset.srcset;
