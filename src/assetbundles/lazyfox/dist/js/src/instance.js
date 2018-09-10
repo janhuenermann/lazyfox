@@ -1,4 +1,3 @@
-import blur from './appearance/blur'
 
 export class lazyfox {
 
