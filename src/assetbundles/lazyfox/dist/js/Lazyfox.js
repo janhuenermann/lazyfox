@@ -523,10 +523,10 @@ function activate(lf) {
     var h = lf.placeholder.naturalHeight;
 
     if (w == 0 && h == 0) {
-      lf.placeholder.addEventListener('load', function () {
+      lf.placeholder.onload = function () {
         draw(ctx, canvas, lf);
         resolve();
-      });
+      };
     } else {
       draw(ctx, canvas, lf);
       resolve();

@@ -18,10 +18,10 @@ export default function activate(lf) {
 		let h = lf.placeholder.naturalHeight;
 
 		if (w == 0 && h == 0) {
-			lf.placeholder.addEventListener('load', () => {
+			lf.placeholder.onload = () => {
 				draw(ctx, canvas, lf)
 				resolve()
-			})
+			}
 		}
 		else {
 			draw(ctx, canvas, lf);
