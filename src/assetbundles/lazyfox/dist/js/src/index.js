@@ -28,7 +28,6 @@ function present(image) {
 		lazyfox.autoSize.add(image);
 		delete image.dataset.sizes;
 	}
-
 	else {
 		image.sizes = image.dataset.sizes;
 		delete image.dataset.sizes;

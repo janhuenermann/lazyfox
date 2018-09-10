@@ -39,7 +39,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $someAttribute = 'Some Default';
+    public $sourceSet = [ ['size' => '40%'], ['size' => '75%'], ['size' => '100%'] ];
 
     public $previewType = 'pixelated';
 

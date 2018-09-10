@@ -33,10 +33,7 @@
 	value: settings['previewSize']
 })}}
 
-{{ forms.textField({
-    label: 'Some Field',
-    instructions: 'Enter some setting here.',
-    id: 'someAttribute',
-    name: 'someAttribute',
-    value: settings['someAttribute']})
-}}
+{{forms.editableTableField({
+	cols: { size: { heading: 'Size' } },
+	rows: settings['sourceSet']
+})}}
