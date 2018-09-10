@@ -88,7 +88,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
            '<picture class="lazyfox --not-loaded' . $classes . '">
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
                 <img src="' . $placeholder . '" class=--placeholder>
-                <img data-srcset="' . $srcset . '" data-src="' .  $src . '">
+                <img sizes="400px" data-srcset="' . $srcset . '" data-src="' .  $src . '">
                 <noscript><img srcset="' . $srcset . '" src="' . $src . '"></noscript>
             </picture>';
 

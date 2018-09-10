@@ -1,14 +1,25 @@
-export function debounce(fn) {
-	let active = false;
+export function debounce(func) {
+	var timeout, timestamp;
+	var wait = 99;
+	var run = function(){
+		timeout = null;
+		func();
+	};
+
+	var later = function() {
+		var last = Date.now() - timestamp;
+		if (last < wait) {
+			setTimeout(later, wait - last);
+		} else {
+			(requestIdleCallback || run)(run);
+		}
+	};
 
 	return function() {
-		if (active === false) {
-			active = true
+		timestamp = Date.now();
 
-			setTimeout(() => {
-				fn()
-				active = false
-			}, 200);
+		if (!timeout) {
+			timeout = setTimeout(later, wait);
 		}
-	}
-}
+	};
+};
