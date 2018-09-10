@@ -11,7 +11,7 @@ export function debounce(func) {
 		if (last < wait) {
 			setTimeout(later, wait - last);
 		} else {
-			(requestIdleCallback || run)(run);
+			(window.requestIdleCallback || run)(run);
 		}
 	};
 
