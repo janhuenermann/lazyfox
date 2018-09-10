@@ -113,9 +113,9 @@ var _class$1 = function () {
     key: "_stopObserving",
     value: function _stopObserving() {
       this._running = false;
-      document.removeEventListener("scroll", checker);
-      window.removeEventListener("resize", checker);
-      window.removeEventListener("orientationchange", checker);
+      document.removeEventListener("scroll", this.checker);
+      window.removeEventListener("resize", this.checker);
+      window.removeEventListener("orientationchange", this.checker);
     }
   }, {
     key: "observe",

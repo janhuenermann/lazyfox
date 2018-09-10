@@ -31,9 +31,9 @@ export default class {
 	_stopObserving () {
 		this._running = false;
 
-		document.removeEventListener("scroll", checker);
-		window.removeEventListener("resize", checker);
-		window.removeEventListener("orientationchange", checker);
+		document.removeEventListener("scroll", this.checker);
+		window.removeEventListener("resize", this.checker);
+		window.removeEventListener("orientationchange", this.checker);
 	}
 
 	observe(element) {
