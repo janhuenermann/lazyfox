@@ -1,6 +1,6 @@
 import * as stackblur from '../vendor/stackblur'
 
-const radius = 20
+const radius = 10
 const scale = 10
 
 export default function activate(lf) {

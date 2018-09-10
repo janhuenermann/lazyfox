@@ -510,7 +510,7 @@ function BlurStack() {
   this.next = null;
 }
 
-var radius = 20;
+var radius = 10;
 function activate(lf) {
   var canvas = document.createElement('canvas');
   canvas.classList.add('--placeholder');
