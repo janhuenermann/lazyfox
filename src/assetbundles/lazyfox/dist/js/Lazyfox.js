@@ -332,7 +332,7 @@ function activate(lf) {
   canvas.width = w * scale;
   canvas.height = h * scale;
   ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
-  StackBlur.canvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
+  undefined(canvas, 0, 0, canvas.width, canvas.height, radius);
 }
 
 var lazyfox =
