@@ -39,19 +39,26 @@ function kickstartLazyFox() {
 		observer = new fallbackObserver(imagesArr, init, present)
 	}
 
+	const pictureRegExp = /^picture$/i;
+
 	if (window.MutationObserver) {
-		let mutations = new window.MutationObserver(debounce(() => {
-			for (var i = 0; i < images.length; i++) {
-				// skip already observed images
-				if (images[i]._lf) 
-					continue
-
-				observer.observe(images[i])
+		let mutations = new window.MutationObserver(records => {
+			for (var i = 0; i < records.length; i++) {
+				let record = records[i]
+				for (var i = 0; i < record.addedNodes.length; i++) {
+					let node = record.addedNodes[i]
+					if (!node._lf
+						&& node.parentNode.tagName.test(pictureRegExp)
+						&& node.parentNode.classList.contains('lazyfox')
+						&& node.dataset.src) {
+						init(node)
+					} 
+				}
 			}
-		}))
+		})
 
-		var config = { attributes: false, subtree: true, childList: true, characterData: false };
-		mutations.observe(document.body, config);
+		var config = { subtree: true, childList: true };
+		mutations.observe(document.documentElement, config);
 	}
 }
 

@@ -641,21 +641,27 @@ function kickstartLazyFox() {
     observer = new _default$1(imagesArr, init, present);
   }
 
+  var pictureRegExp = /^picture$/i;
+
   if (window.MutationObserver) {
-    var mutations = new window.MutationObserver(debounce(function () {
-      for (var i = 0; i < images.length; i++) {
-        // skip already observed images
-        if (images[i]._lf) continue;
-        observer.observe(images[i]);
+    var mutations = new window.MutationObserver(function (records) {
+      for (var i = 0; i < records.length; i++) {
+        var record = records[i];
+
+        for (var i = 0; i < record.addedNodes.length; i++) {
+          var node = record.addedNodes[i];
+
+          if (!node._lf && node.parentNode.tagName.test(pictureRegExp) && node.parentNode.classList.contains('lazyfox') && node.dataset.src) {
+            init(node);
+          }
+        }
       }
-    }));
+    });
     var config = {
-      attributes: false,
       subtree: true,
-      childList: true,
-      characterData: false
+      childList: true
     };
-    mutations.observe(document.body, config);
+    mutations.observe(document.documentElement, config);
   }
 }
 
