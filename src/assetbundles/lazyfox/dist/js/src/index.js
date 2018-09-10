@@ -42,9 +42,15 @@ function present(image) {
 	function afterPresent() {
 		image.parentNode.classList.remove("--not-loaded")
 
+
 		setTimeout(() => {
 			let placeholder = image.parentNode.querySelector(".--placeholder")
 			placeholder.parentNode.removeChild(placeholder)
+
+			image.parentNode.classList.remove('--sized')
+
+			let sizer = image.parentNode.querySelector(".--sizer")
+			sizer.parentNode.removeChild(sizer)
 		}, 500)
 
 		image.removeEventListener('load', afterPresent)

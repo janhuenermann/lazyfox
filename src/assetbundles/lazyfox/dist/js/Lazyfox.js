@@ -319,6 +319,9 @@ function present(image) {
     setTimeout(function () {
       var placeholder = image.parentNode.querySelector(".--placeholder");
       placeholder.parentNode.removeChild(placeholder);
+      image.parentNode.classList.remove('--sized');
+      var sizer = image.parentNode.querySelector(".--sizer");
+      sizer.parentNode.removeChild(sizer);
     }, 500);
     image.removeEventListener('load', afterPresent);
   }
