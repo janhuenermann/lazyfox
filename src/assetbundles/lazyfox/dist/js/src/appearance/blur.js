@@ -5,6 +5,8 @@ const scale = 10
 
 export default function activate(lf) {
 	let canvas = document.createElement('canvas')
+	let ctx = canvas.getContext('2d');
+
 	lf.container.insertBefore(canvas, lf.placeholder.nextSibling)
 
 	let w = lf.placeholder.naturalWidth;
