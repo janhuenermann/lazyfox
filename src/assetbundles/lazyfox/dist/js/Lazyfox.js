@@ -516,12 +516,16 @@ function activate(lf) {
   canvas.classList.add('--placeholder');
   var ctx = canvas.getContext('2d');
   lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
-  var w = lf.placeholder.naturalWidth;
-  var h = lf.placeholder.naturalHeight;
-  canvas.width = 100;
-  canvas.height = 100;
-  ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
-  processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
+  lf.placeholder.addEventListener('load', function () {
+    var w = lf.placeholder.naturalWidth;
+    var h = lf.placeholder.naturalHeight;
+    canvas.width = 100;
+    canvas.height = 100;
+    ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
+    processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
+  }, {
+    once: true
+  });
 }
 
 var lazyfox =
