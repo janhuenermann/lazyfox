@@ -16,10 +16,12 @@
 {% import "_includes/forms" as forms %}
 
 {{forms.selectField({
+	label: 'Appearance',
+	instructions: 'This is how your image will preview.',
 	name: 'appearance',
 	id: 'appearance',
-	options: [ 'eins', 'zwei' ],
-	values: [ 'one', 'two' ]
+	options: [ 'Pixelated', 'Blurred' ],
+	values: [ 'pixelated', 'blurred' ]
 })}}
 {{ forms.textField({
     label: 'Some Field',
