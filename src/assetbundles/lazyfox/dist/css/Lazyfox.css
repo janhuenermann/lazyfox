@@ -59,7 +59,7 @@
 
 .lazyfox.--blurred .--placeholder {
 	filter: blur(8px);
-	transform: scale(1.08);
+	transform: scale(1.1);
 	outline: 100px solid var(--color);
 }
 
