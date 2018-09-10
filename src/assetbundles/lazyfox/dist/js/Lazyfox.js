@@ -592,6 +592,12 @@ function () {
         _this2.container.classList.remove('--activated');
 
         _this2.container.removeChild(_this2.sizer);
+
+        var canvas = _this2.container.getElementsByTag('canvas');
+
+        for (var i = 0; i < canvas.length; i++) {
+          _this2.container.removeChild(canvas[i]);
+        }
       }, 500);
       this.done = true;
     }

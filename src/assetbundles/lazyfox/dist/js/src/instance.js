@@ -52,12 +52,17 @@ export class lazyfox {
 		this.container.classList.remove("--not-loaded")
 
 		setTimeout(() => {
-			this.container.removeChild(this.placeholder)
+			this.container.removeChild(this.placeholder);
 
 			this.container.classList.remove('--sized')
 			this.container.classList.remove('--activated');
 
-			this.container.removeChild(this.sizer)
+			this.container.removeChild(this.sizer);
+
+			let canvas = this.container.getElementsByTag('canvas')
+			for (var i = 0; i < canvas.length; i++) {
+				this.container.removeChild(canvas[i])
+			}
 		}, 500)
 
 		this.done = true
