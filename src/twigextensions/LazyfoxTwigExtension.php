@@ -69,6 +69,26 @@ class LazyfoxTwigExtension extends \Twig_Extension
         ];
     }
 
+    public function getSourceSet($settings, int $size) {
+        $sizes = $settings->sourceSet;
+        $arr = [];
+
+        for ($i=0; $i < count($sizes); $i++) { 
+            $row = $sizes[$i];
+
+            if (empty($row['size'])) 
+                continue;
+
+            if (substr($row['size'], -1) !== '%')
+                continue;
+
+            $percentage = intval(substr($row['size'], 0, -1));
+            $arr[] = ceil($size * $percentage / 100);
+        }
+
+        return $arr;
+    }
+
     public function image(Asset $asset, $transform = NULL) {
         $settings = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings;
         $previewType = $settings->previewType;
@@ -80,7 +100,9 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $padding = $h / $w * 100;
         $placeholder = $this->getBase64Placeholder($asset, $transform, $previewSize);
         $src = $asset->getUrl($transform);
-        $srcset = $this->produceSourceSet([$w * 0.4, $w * 0.75, $w], $asset, $transform);
+
+        $sizes = $this->getSourceSet($settings, max($w, $h));
+        $srcset = $this->produceSourceSet($sizes, $asset, $transform);
 
         $classes = " --no-progress --transition --sized --$previewType";
 
