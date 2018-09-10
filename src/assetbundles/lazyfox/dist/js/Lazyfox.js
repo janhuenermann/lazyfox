@@ -511,12 +511,11 @@ function BlurStack() {
 }
 
 var radius = 10;
+var scale = 8;
 function activate(lf) {
   return new Promise(function (resolve, reject) {
     var canvas = document.createElement('canvas');
     canvas.classList.add('--placeholder');
-    canvas.width = 100;
-    canvas.height = 100;
     var ctx = canvas.getContext('2d');
     lf.container.insertBefore(canvas, lf.placeholder.nextSibling);
     var w = lf.placeholder.naturalWidth;
@@ -535,6 +534,8 @@ function activate(lf) {
 }
 
 function draw(ctx, canvas, lf) {
+  canvas.width = lf.placeholder.naturalWidth * scale;
+  canvas.height = lf.placeholder.naturalHeight * scale;
   ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
   processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
 }

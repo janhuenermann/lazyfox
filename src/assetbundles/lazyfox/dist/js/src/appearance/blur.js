@@ -1,14 +1,12 @@
 import * as stackblur from '../vendor/stackblur'
 
 const radius = 10
-const scale = 10
+const scale = 8
 
 export default function activate(lf) {
 	return new Promise((resolve, reject) => {
 		let canvas = document.createElement('canvas');
 		canvas.classList.add('--placeholder');
-		canvas.width = 100;
-		canvas.height = 100;
 
 		let ctx = canvas.getContext('2d');
 
@@ -32,6 +30,9 @@ export default function activate(lf) {
 }
 
 function draw (ctx, canvas, lf) {
+	canvas.width = lf.placeholder.naturalWidth * scale;
+	canvas.height = lf.placeholder.naturalHeight * scale;
+
 	ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
 	stackblur.processCanvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
 }
