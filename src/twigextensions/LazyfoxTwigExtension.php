@@ -84,9 +84,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
                 <div style="padding-bottom: ' . $padding . '%" class=--sizer></div>
                 <img src="' . $placeholder . '" class=--placeholder>
                 <img data-srcset="' . $srcset . '" data-src="' .  $src . '">
-                <noscript>
-                    <img srcset="' . $srcset . '" src="' . $src . '>
-                </noscript>
+                <noscript><img srcset="' . $srcset . '" src="' . $src . '></noscript>
             </picture>';
 
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
