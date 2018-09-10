@@ -200,8 +200,7 @@ function () {
             var entry = _step.value;
             var width = entry.contentRect.width;
             var el = entry.target;
-
-            _this.update(el, width);
+            el.autoSizeUpdate(width);
           }
         } catch (err) {
           _didIteratorError = true;
@@ -246,6 +245,7 @@ function () {
       }
 
       this.elements.push(el);
+      el.autoSizeUpdate = debounce(this.update.bind(this, el));
     }
   }, {
     key: "update",
