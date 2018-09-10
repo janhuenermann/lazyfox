@@ -80,7 +80,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $padding = $h / $w * 100;
         $placeholder = $this->getBase64Placeholder($asset, $transform, $previewSize);
         $src = $asset->getUrl($transform);
-        $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
+        $srcset = $this->produceSourceSet([$w * 0.4, $w * 0.75, $w], $asset, $transform);
 
         $classes = " --no-progress --transition --$previewType";
 
@@ -108,7 +108,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $attr = [];
 
         foreach ($srcset as $size) {
-            $t = $this->getScaledDownTransform($transform, $size);
+            $t = $this->getScaledDownTransform($transform, ceil($size));
             $url = $asset->getUrl($t);
             $attr[] = $url . ' ' . $size . 'w';
         }
