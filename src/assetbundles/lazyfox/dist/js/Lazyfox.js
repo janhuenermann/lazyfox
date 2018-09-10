@@ -331,7 +331,7 @@ function activate(lf) {
   var h = lf.placeholder.naturalHeight;
   canvas.width = w * scale;
   canvas.height = h * scale;
-  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(lf.placeholder, 0, 0, canvas.width, canvas.height);
   StackBlur.canvasRGB(canvas, 0, 0, canvas.width, canvas.height, radius);
 }
 
