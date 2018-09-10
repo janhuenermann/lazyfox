@@ -56,7 +56,7 @@ class LazyfoxAsset extends AssetBundle
             'js/lazyfox.js',
         ];
 
-        $this->jsOptions = [ 'position' => \yii\web\View::POS_HEAD ];
+        // $this->jsOptions = [ 'position' => \yii\web\View::POS_HEAD ];
 
         $this->css = [
             'css/lazyfox.css',
