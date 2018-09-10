@@ -649,7 +649,7 @@ function kickstartLazyFox() {
           var node = record.addedNodes[j];
 
           if (!node._lf && node instanceof HTMLElement && node.tagName === "IMG" && node.parentNode.tagName === "PICTURE" && node.parentNode.classList.contains('lazyfox') && node.dataset.src) {
-            init(node);
+            observer.observe(node);
           }
         }
       }

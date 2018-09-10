@@ -51,7 +51,7 @@ function kickstartLazyFox() {
 						&& node.parentNode.tagName === "PICTURE"
 						&& node.parentNode.classList.contains('lazyfox')
 						&& node.dataset.src) {
-						init(node)
+						observer.observe(node)
 					} 
 				}
 			}
