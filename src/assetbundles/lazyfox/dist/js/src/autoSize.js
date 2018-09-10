@@ -9,7 +9,7 @@ export default class autoSize {
 				for (let entry of entries) {
 					let width = entry.contentRect.width;
 					let el = entry.target;
-					this.update(el, width);
+					el.autoSizeUpdate(width);
 				}
 			});
 		}
@@ -38,6 +38,8 @@ export default class autoSize {
 		}
 
 		this.elements.push(el);
+
+		el.autoSizeUpdate = debounce(this.update.bind(this, el));
 	}
 
 	update (el, width) {
