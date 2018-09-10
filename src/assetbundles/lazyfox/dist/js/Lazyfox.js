@@ -642,13 +642,20 @@ function kickstartLazyFox() {
   }
 
   if (window.MutationObserver) {
-    new window.MutationObserver(debounce(function () {
+    var mutations = new window.MutationObserver(debounce(function () {
       for (var i = 0; i < images.length; i++) {
         // skip already observed images
         if (images[i]._lf) continue;
         observer.observe(images[i]);
       }
     }));
+    var config = {
+      attributes: false,
+      subtree: true,
+      childList: true,
+      characterData: false
+    };
+    mutations.observe(document.body, config);
   }
 }
 
