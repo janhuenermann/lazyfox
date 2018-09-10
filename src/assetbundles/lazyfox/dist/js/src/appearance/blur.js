@@ -2,8 +2,7 @@ import * as stackblur from '../vendor/stackblur'
 
 const radius = 20
 
-export default function activate(image) {
-	let lf = image._lazyfox
+export default function activate(lf) {
 	let canvas = document.createElement('canvas')
 	lf.container.insertAfter(canvas, lf.placeholder)
 

@@ -735,8 +735,7 @@ function BlurStack() {
 }
 
 var radius = 20;
-function activate(image$$1) {
-  var lf = image$$1._lazyfox;
+function activate(lf) {
   var canvas = document.createElement('canvas');
   lf.container.insertAfter(canvas, lf.placeholder);
   image(lf.placeholder, canvas, radius, false);
