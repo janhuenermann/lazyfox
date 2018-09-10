@@ -15,6 +15,7 @@
 	position: relative;
 	overflow: hidden;
 	margin: 0;
+	width: 100%;
 }
 
 .lazyfox .--sizer {
