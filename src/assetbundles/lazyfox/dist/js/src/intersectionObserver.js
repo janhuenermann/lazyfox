@@ -11,7 +11,7 @@ export default class {
 	}
 
 	static isSupported () {
-		return window.IntersectionObserver !== undefined;
+		return "IntersectionObserver" in window;
 	}
 
 	observe (el) {

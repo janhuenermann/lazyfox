@@ -65,6 +65,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     public function getFunctions() {
         return [
             new \Twig_SimpleFunction('image', [$this, 'image']),
+            new \Twig_SimpleFunction('placeholder', [$this, 'placeholder'])
         ];
     }
 
@@ -73,7 +74,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $h = $asset->getHeight($transform);
 
         $padding = $h / $w * 100;
-        $placeholder = $this->getBase64($asset, $transform);
+        $placeholder = $this->getBase64Placeholder($asset, $transform);
         $src = $asset->getUrl($transform);
         $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
 
@@ -90,7 +91,8 @@ class LazyfoxTwigExtension extends \Twig_Extension
         Craft::$app->view->registerAssetBundle(LazyfoxAsset::class);
     }
 
-    public function getBase64(Asset $asset, $transform) {
+
+    public function getBase64Placeholder(Asset $asset, $transform) {
         $transform = $this->getScaledDownTransform($transform, 16);
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
         $binary = file_get_contents($file);
