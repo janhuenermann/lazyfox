@@ -70,6 +70,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, $transform = NULL) {
+        $previewType = janhuenermann\lazyfox\Lazyfox::getInstance()->settings->previewType;
         $w = $asset->getWidth($transform);
         $h = $asset->getHeight($transform);
 
@@ -78,7 +79,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $src = $asset->getUrl($transform);
         $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
 
-        $classes = " --no-progress --transition --pixelated";
+        $classes = " --no-progress --transition --$previewType";
 
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '">

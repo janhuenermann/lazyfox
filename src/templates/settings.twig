@@ -16,10 +16,10 @@
 {% import "_includes/forms" as forms %}
 
 {{forms.selectField({
-	label: 'Appearance',
+	label: 'Appearance / preview type',
 	instructions: 'This is how your image will preview.',
-	name: 'appearance',
-	id: 'appearance',
+	name: 'previewType',
+	id: 'previewType',
 	options: [ 'Pixelated', 'Blurred' ],
 	values: [ 'pixelated', 'blurred' ]
 })}}

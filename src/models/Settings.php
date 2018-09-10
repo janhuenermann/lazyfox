@@ -41,6 +41,8 @@ class Settings extends Model
      */
     public $someAttribute = 'Some Default';
 
+    public $previewType = 'pixelated';
+
     // Public Methods
     // =========================================================================
 
