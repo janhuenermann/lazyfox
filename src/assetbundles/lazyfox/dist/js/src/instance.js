@@ -15,18 +15,6 @@ export class lazyfox {
 
 	activate(autoSize) {
 		this.autoSize = autoSize
-
-		switch (this.type) {
-			case 'blurred':
-				blur(this).then(() => this.activationDone())
-				break ;
-			default:
-				this.activationDone()
-				break ;
-		}
-	}
-
-	activationDone () {
 		this.container.classList.add('--activated');
 	}
 

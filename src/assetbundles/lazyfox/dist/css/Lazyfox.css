@@ -26,7 +26,7 @@
 	width: 100%;
 }
 
-.lazyfox img, .lazyfox canvas {
+.lazyfox img {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -36,7 +36,7 @@
 	position: relative;
 }
 
-.lazyfox.--sized img, .lazyfox canvas {
+.lazyfox.--sized img {
 	position: absolute;
 	top: 0; left: 0;
 	right: 0; bottom: 0;
@@ -58,10 +58,8 @@
 }
 
 .lazyfox.--blurred .--placeholder {
-}
-
-.lazyfox.--blurred.--activated img.--placeholder {
-	display: none;
+	filter: blur(10px);
+	transform: scale(1.1);
 }
 
 .lazyfox.--transition .--placeholder {
