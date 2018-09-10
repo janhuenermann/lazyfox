@@ -67,7 +67,7 @@
 }
 
 .lazyfox.--transition.--blurred .--placeholder {
-	transition: 300ms filter;
+	transition: 0ms opacity 300ms, 300ms filter;
 }
 
 .lazyfox.--transition .--placeholder {
