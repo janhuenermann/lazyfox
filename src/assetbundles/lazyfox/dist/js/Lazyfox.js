@@ -646,8 +646,8 @@ function kickstartLazyFox() {
       for (var i = 0; i < records.length; i++) {
         var record = records[i];
 
-        for (var i = 0; i < record.addedNodes.length; i++) {
-          var node = record.addedNodes[i];
+        for (var j = 0; j < record.addedNodes.length; j++) {
+          var node = record.addedNodes[j];
 
           if (!node._lf && node instanceof HTMLElement && node.tagName === "IMG" && node.parentNode.tagName === "PICTURE" && node.parentNode.classList.contains('lazyfox') && node.dataset.src) {
             init(node);

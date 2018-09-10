@@ -39,14 +39,12 @@ function kickstartLazyFox() {
 		observer = new fallbackObserver(imagesArr, init, present)
 	}
 
-	const pictureRegExp = /^picture$/i;
-
 	if (window.MutationObserver) {
 		let mutations = new window.MutationObserver(records => {
 			for (var i = 0; i < records.length; i++) {
 				let record = records[i]
-				for (var i = 0; i < record.addedNodes.length; i++) {
-					let node = record.addedNodes[i]
+				for (var j = 0; j < record.addedNodes.length; j++) {
+					let node = record.addedNodes[j]
 					if (!node._lf
 						&& node instanceof HTMLElement
 						&& node.tagName === "IMG"
