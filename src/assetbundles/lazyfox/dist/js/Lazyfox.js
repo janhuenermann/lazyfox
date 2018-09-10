@@ -752,7 +752,7 @@ function () {
     this.placeholder = this.container.querySelector('.--placeholder');
     this.type = this.container.dataset.type;
     this.image = el;
-    this.sizer = image.parentNode.querySelector(".--sizer");
+    this.sizer = this.container.querySelector(".--sizer");
     this.done = false;
     el._lf = el.lazyfox = this;
   }
