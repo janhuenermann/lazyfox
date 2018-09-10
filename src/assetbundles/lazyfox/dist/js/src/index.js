@@ -15,14 +15,17 @@ import intersectionObserver from './intersectionObserver'
 import fallbackObserver from './fallbackObserver'
 import autoSize from './autoSize'
 
+var lazyfox = { 
+	autoSize: new autoSize() 
+}
+
 function init(image) {
 	image._lazyfox = true
 }
 
-
 function present(image) {
 	if (image.dataset.sizes == "auto") {
-		autoSize(image)
+		lazyfox.autoSize.add(image)
 	}
 
 	image.srcset = image.dataset.srcset;

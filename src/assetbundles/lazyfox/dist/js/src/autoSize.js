@@ -41,7 +41,7 @@ export default class autoSize {
 	}
 
 	update (el, width) {
-		let width = width || autoSize.getOffsetWidth(image);
+		width = width || autoSize.getOffsetWidth(image);
 		for (var i = 0; i < el._imageSources.length; i++) {
 			el._imageSources[i].setAttribute("sizes", width + "px")
 		}

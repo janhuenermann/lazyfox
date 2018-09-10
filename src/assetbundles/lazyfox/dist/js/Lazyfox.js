@@ -1,12 +1,27 @@
-function debounce(fn) {
-  var active = false;
+function debounce(func) {
+  var timeout, timestamp;
+  var wait = 99;
+
+  var run = function run() {
+    timeout = null;
+    func();
+  };
+
+  var later = function later() {
+    var last = Date.now() - timestamp;
+
+    if (last < wait) {
+      setTimeout(later, wait - last);
+    } else {
+      (requestIdleCallback || run)(run);
+    }
+  };
+
   return function () {
-    if (active === false) {
-      active = true;
-      setTimeout(function () {
-        fn();
-        active = false;
-      }, 200);
+    timestamp = Date.now();
+
+    if (!timeout) {
+      timeout = setTimeout(later, wait);
     }
   };
 }
@@ -33,11 +48,13 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
-var _class = function () {
-  function _class(elements, init, callback) {
+var _default =
+/*#__PURE__*/
+function () {
+  function _default(elements, init, callback) {
     var _this = this;
 
-    _classCallCheck(this, _class);
+    _classCallCheck(this, _default);
 
     this.callback = callback;
     this.init = init;
@@ -52,7 +69,7 @@ var _class = function () {
     }
   }
 
-  _createClass(_class, [{
+  _createClass(_default, [{
     key: "observe",
     value: function observe(el) {
       if (this.init) this.init(el);
@@ -73,18 +90,20 @@ var _class = function () {
   }], [{
     key: "isSupported",
     value: function isSupported() {
-      return window.IntersectionObserver !== undefined;
+      return "IntersectionObserver" in window;
     }
   }]);
 
-  return _class;
+  return _default;
 }();
 
-var _class$1 = function () {
-  function _class(elements, init, callback) {
+var _default$1 =
+/*#__PURE__*/
+function () {
+  function _default(elements, init, callback) {
     var _this = this;
 
-    _classCallCheck(this, _class);
+    _classCallCheck(this, _default);
 
     this._elements = [];
     this._running = false;
@@ -99,7 +118,7 @@ var _class$1 = function () {
     }
   }
 
-  _createClass(_class, [{
+  _createClass(_default, [{
     key: "_startObserving",
     value: function _startObserving() {
       if (this._running) return;
@@ -149,7 +168,108 @@ var _class$1 = function () {
     }
   }]);
 
-  return _class;
+  return _default;
+}();
+
+var autoSize =
+/*#__PURE__*/
+function () {
+  function autoSize() {
+    var _this = this;
+
+    _classCallCheck(this, autoSize);
+
+    if ("ResizeObserver" in window) {
+      // This is great news!
+      this.resizeObserver = new ResizeObserver(function (entries) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var entry = _step.value;
+            var width = entry.contentRect.width;
+            var el = entry.target;
+
+            _this.update(el, width);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      });
+    } else {
+      var debouncedResize = debounce(function () {
+        return _this.resize();
+      });
+      window.addEventListener("resize", debouncedResize);
+    }
+
+    this.elements = [];
+  }
+
+  _createClass(autoSize, [{
+    key: "add",
+    value: function add(el) {
+      var sources = [image];
+
+      if (image.parentNode.tagName == "picture") {
+        sources = sources.concat(image.getElementsByTagName("source"));
+      }
+
+      el._imageSources = sources; // initial set
+
+      this.update(el);
+
+      if (this.resizeObserver) {
+        this.resizeObserver.observe(el);
+      }
+
+      this.elements.push(el);
+    }
+  }, {
+    key: "update",
+    value: function update(el, width) {
+      width = width || autoSize.getOffsetWidth(image);
+
+      for (var i = 0; i < el._imageSources.length; i++) {
+        el._imageSources[i].setAttribute("sizes", width + "px");
+      }
+    }
+  }, {
+    key: "resize",
+    value: function resize() {
+      for (var i = 0; i < this.elements.length; i++) {
+        this.update(this.elements[i]);
+      }
+    } // Traverses up the DOM until it finds a reasonable sized element.
+
+  }], [{
+    key: "getOffsetWidth",
+    value: function getOffsetWidth(el) {
+      var width;
+
+      do {
+        width = el.offsetWidth;
+        el = el.parentNode;
+      } while (width < 10 && el);
+
+      return width;
+    }
+  }]);
+
+  return autoSize;
 }();
 
 /**
@@ -163,27 +283,34 @@ var _class$1 = function () {
  * @package   Lazyfox
  * @since     0.0.1
  */
+var lazyfox = {
+  autoSize: new autoSize()
+};
 
-function initImage(image) {
+function init(image) {
   image._lazyfox = true;
 }
 
-function loadImage(image) {
+function present(image) {
+  if (image.dataset.sizes == "auto") {
+    lazyfox.autoSize.add(image);
+  }
+
   image.srcset = image.dataset.srcset;
   image.src = image.dataset.src;
   delete image.dataset.srcset;
   delete image.dataset.src;
 
-  function afterLoadImage() {
+  function afterPresent() {
     image.parentNode.classList.remove("--not-loaded");
     setTimeout(function () {
       var placeholder = image.parentNode.querySelector(".--placeholder");
       placeholder.parentNode.removeChild(placeholder);
     }, 500);
-    image.removeEventListener('load', afterLoadImage);
+    image.removeEventListener('load', afterPresent);
   }
 
-  image.addEventListener('load', afterLoadImage, {
+  image.addEventListener('load', afterPresent, {
     once: true
   });
 }
@@ -193,10 +320,10 @@ function kickstartLazyFox() {
   var imagesArr = [].slice.call(images);
   var observer = null;
 
-  if (_class.isSupported()) {
-    observer = new _class(imagesArr, initImage, loadImage);
+  if (_default.isSupported()) {
+    observer = new _default(imagesArr, init, present);
   } else {
-    observer = new _class$1(imagesArr, initImage, loadImage);
+    observer = new _default$1(imagesArr, init, present);
   }
 
   if (window.MutationObserver) {

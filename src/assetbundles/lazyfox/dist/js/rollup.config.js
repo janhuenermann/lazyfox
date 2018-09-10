@@ -8,9 +8,6 @@ export default {
     format: 'es'
   },
   plugins: [
-    babel({
-      babelrc: false,
-      presets: [['env', { modules: false }]]
-    })
+    babel()
   ]
 };
