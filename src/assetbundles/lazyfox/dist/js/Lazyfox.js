@@ -652,4 +652,4 @@ function kickstartLazyFox() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", kickstartLazyFox);
+kickstartLazyFox(); // document.addEventListener("DOMContentLoaded", kickstartLazyFox);
