@@ -19,9 +19,14 @@
 	#settings-sourceSet textarea {
 		font-family: monospace;
 	}
+
+	#lazyfox-icon {
+		max-width: 300px;
+		width: 40%;
+	}
 </style>
 
-{{ craft.app.assetManager.getPublishedUrl("@janhuenermann/lazyfox/assetbundles/lazyfox/dist/img/Lazyfox-icon.svg") }}
+<img src="{{ craft.app.assetManager.getPublishedUrl("@janhuenermann/lazyfox/assetbundles/lazyfox/dist/img/Lazyfox-icon.svg") }}" id=lazyfox-icon>
 
 {{forms.selectField({
 	label: 'Appearance / preview type',
