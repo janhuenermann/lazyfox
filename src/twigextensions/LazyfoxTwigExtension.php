@@ -70,12 +70,15 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
     public function image(Asset $asset, $transform = NULL) {
-        $previewType = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings->previewType;
+        $settings = \janhuenermann\lazyfox\Lazyfox::getInstance()->settings;
+        $previewType = $settings->previewType;
+        $previewSize = $settings->previewSize;
+
         $w = $asset->getWidth($transform);
         $h = $asset->getHeight($transform);
 
         $padding = $h / $w * 100;
-        $placeholder = $this->getBase64Placeholder($asset, $transform);
+        $placeholder = $this->getBase64Placeholder($asset, $transform, $previewSize);
         $src = $asset->getUrl($transform);
         $srcset = $this->produceSourceSet([$w / 2, $w * 3 / 4, $w], $asset, $transform);
 
@@ -93,8 +96,8 @@ class LazyfoxTwigExtension extends \Twig_Extension
     }
 
 
-    public function getBase64Placeholder(Asset $asset, $transform) {
-        $transform = $this->getScaledDownTransform($transform, 16);
+    public function getBase64Placeholder(Asset $asset, $transform, $previewSize = 16) {
+        $transform = $this->getScaledDownTransform($transform, $previewSize);
         $file = $asset->volume->rootPath . '/' . $this->getTransformFile($asset, $transform);
         $binary = file_get_contents($file);
         // Return as base64 string
@@ -136,11 +139,11 @@ class LazyfoxTwigExtension extends \Twig_Extension
             
             if ($ratio > 1) {
                 $transform->width = $size;
-                $transform->height = $size / $ratio;
+                $transform->height = ceil($size / $ratio);
             }
             else {
                 $transform->height = $size;
-                $transform->width = $size * $ratio;
+                $transform->width = ceil($size * $ratio);
             }
         }
 
