@@ -48,7 +48,9 @@ function kickstartLazyFox() {
 				for (var i = 0; i < record.addedNodes.length; i++) {
 					let node = record.addedNodes[i]
 					if (!node._lf
-						&& pictureRegExp.test(node.parentNode.tagName)
+						&& node instanceof HTMLElement
+						&& node.tagName === "IMG"
+						&& node.parentNode.tagName === "PICTURE"
 						&& node.parentNode.classList.contains('lazyfox')
 						&& node.dataset.src) {
 						init(node)
