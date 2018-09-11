@@ -59,7 +59,7 @@
 
 .lazyfox.--blurred .--placeholder {
 	filter: blur(10px) brightness(0.9);
-	transform: scale(1.1);
+	transform: scale(1.15);
 }
 
 .lazyfox.--transition .--placeholder {
