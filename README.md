@@ -13,6 +13,7 @@ A plugin that makes lazy loading your images a breeze.
 - easy to use API that is native to Craft and Twig
 - uses the latest and greatest HTML5 and JS APIs such as MutationObserver, ResizeObserver and Intersection API. Has polyfills included.
 - lightweight: 7kB JavaScript, 1kB CSS
+- noscript fallback
 
 With LazyFox document jumping is a thing of the past!
 
@@ -42,6 +43,10 @@ If you want to install it manually however, follow these instructions.
 
 ## Using lazyfox
 
+To make images lazy-load, simply use the `image` function in Twig.
+
+### image(asset)
+Creates a picture tag enabled for lazy-loading.
 
 ## Code output
 
@@ -58,4 +63,22 @@ After the image has been loaded by LazyFox the resulting HTML structure will loo
 
 As you can see it produces a HTML5 picture element. The underlying img's `sizes` attribute in this case is automatically set by LazyFox in order to load the best fitting image.
 
+
 ## Styling lazy-loaded images in CSS
+
+As the generated code differs slightly from a plain img-tag, it can sometimes be tricky to style the image in a desired way. However with LazyFox it's quite simple. Just target the image inside the picture tag for any img based properties such as object-fit, object-position etc. If you want to adjust the size or anything that has to do with the border box of the element, simply target the picture element itself. 
+
+By default, LazyFox makes the picture tag 100% of the width. But that's easy to change. Keep in mind that it's recommended to use percentages in order to guarantee responsiveness across devices.
+
+A basic example for how to create a lazy-loading square image that doesn't stretch:
+
+```css 
+main .lazyfox {
+	width: 300px;
+	height: 300px;
+}
+
+main .lazyfox img {
+	object-fit: cover;
+}
+```
