@@ -6,6 +6,8 @@ use janhuenermann\lazyfox\Lazyfox;
 use craft\elements\Asset;
 use craft\models\AssetTransform;
 
+use Craft;
+
 class LazyfoxEngine {
 
 	public static function getBase64(Asset $asset, $transform) {
