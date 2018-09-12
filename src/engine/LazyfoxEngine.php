@@ -34,7 +34,7 @@ class LazyfoxEngine {
         $attr = [];
 
         foreach ($srcset as $size) {
-        	$a = $imager->transformImage($asset, [ 'width' => $size, 'format' => 'jpg', 'interlace' => 'partition' ]);
+        	$a = $imager->transformImage($asset, [ 'width' => $size, 'format' => 'jpg', 'interlace' => 'line' ]);
             // $t = static::getScaledDownTransform($transform, ceil($size));
             $url = Craft::getAlias('@web' . $a->getUrl());
             $attr[] = $url . ' ' . $size . 'w';
