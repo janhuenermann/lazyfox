@@ -81,13 +81,13 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $h = $asset->getHeight($transform);
 
         $padding = $h / $w * 100;
-        $preview = $this->getScaledDownTransform($transform, $previewSize, "png");
+        $preview = LazyfoxEngine::getScaledDownTransform($transform, $previewSize, "png");
 
-        $placeholder = $this->getBase64($asset, $preview);
-        $src = $asset->getUrl($transform);
+        $placeholder = LazyfoxEngine::getBase64($asset, $preview);
+        $src = LazyfoxEngine::getUrl($transform);
 
-        $sizes = $this->getSourceSet($settings, max($w, $h));
-        $srcset = $this->produceSourceSet($sizes, $asset, $transform);
+        $sizes = LazyfoxEngine::getSourceSet($settings, max($w, $h));
+        $srcset = LazyfoxEngine::produceSourceSet($sizes, $asset, $transform);
 
         $classes = " --no-progress --transition --sized --$previewType";
 
