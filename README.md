@@ -1,7 +1,7 @@
 <img src="resources/img/lazyfox-icon.png" height=80px>
 # LazyFox plugin for Craft CMS 3.x
 
-A plugin that makes lazy loading your images a breeze.
+A dead simple plugin that makes lazy loading your images a breeze.
 
 ![Screenshot](resources/img/lazyfox-screencap.gif)
 
@@ -14,7 +14,7 @@ Icon attribution: Fox by ester barbato from the Noun Project.
 - displaying awesome placeholders that are embeded into the HTML code while image loads
 - easy to use API that is native to Craft and Twig
 - uses the latest and greatest HTML5 and JS APIs such as MutationObserver, ResizeObserver and Intersection API. Has polyfills included.
-- lightweight: 7kB JavaScript, 1kB CSS
+- lightweight: 7kB JavaScript, <1kB CSS
 - noscript fallback
 
 With LazyFox document jumping is a thing of the past!

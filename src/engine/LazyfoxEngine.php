@@ -8,22 +8,35 @@ use craft\models\AssetTransform;
 
 use Craft;
 
+use aelvan\imager\models\CraftTransformedImageModel;
+use aelvan\imager\Imager;
+
 class LazyfoxEngine {
 
-	public static function getBase64(Asset $asset, $transform) {
-        $path = static::getImagePath($asset, $transform);
-        $binary = file_get_contents($path);
-        // Return as base64 string
-        return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
+	public static function getBase64($asset, $transform) {
+		if ($asset instanceof Asset) {
+			$path = static::getImagePath($asset, $transform);
+	        $binary = file_get_contents($path);
+	        // Return as base64 string
+	        return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
+		}
+
+		else if ($asset instanceof CraftTransformedImageModel) {
+			return $asset->getBase64Encoded();
+		}
+
+		throw new \Exception("Invalid asset provided: $asset");
     }
 
 
     public static function produceSourceSet(array $srcset, Asset $asset, $transform) {
+    	$imager = Imager::getInstance()->imager;
         $attr = [];
 
         foreach ($srcset as $size) {
-            $t = static::getScaledDownTransform($transform, ceil($size));
-            $url = $asset->getUrl($t);
+        	$a = $imager->transformImage($asset, [ 'width' => $size, 'format' => 'jpg', 'interlace' => 'partition' ]);
+            // $t = static::getScaledDownTransform($transform, ceil($size));
+            $url = $asset->getUrl();
             $attr[] = $url . ' ' . $size . 'w';
         }
 
