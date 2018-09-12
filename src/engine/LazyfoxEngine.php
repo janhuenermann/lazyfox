@@ -36,7 +36,7 @@ class LazyfoxEngine {
         foreach ($srcset as $size) {
         	$a = $imager->transformImage($asset, [ 'width' => $size, 'format' => 'jpg', 'interlace' => 'partition' ]);
             // $t = static::getScaledDownTransform($transform, ceil($size));
-            $url = $asset->getUrl();
+            $url = $a->getUrl();
             $attr[] = $url . ' ' . $size . 'w';
         }
 
