@@ -84,7 +84,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $preview = LazyfoxEngine::getScaledDownTransform($transform, $previewSize, "png");
 
         $placeholder = LazyfoxEngine::getBase64($asset, $preview);
-        $src = LazyfoxEngine::getUrl($transform);
+        $src = $asset->getUrl($transform);
 
         $sizes = LazyfoxEngine::getSourceSet($settings, max($w, $h));
         $srcset = LazyfoxEngine::produceSourceSet($sizes, $asset, $transform);
