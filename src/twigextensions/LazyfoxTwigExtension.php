@@ -99,7 +99,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
                 <noscript><img srcset="' . $srcset . '" src="' . $src . '"></noscript>
             </picture>';
 
-        Craft::$app->view->registerAssetBundle('LazyfoxAsset');
+        Craft::$app->view->registerAssetBundle('janhuenermann\lazyfox\assetbundles\Lazyfox\LazyfoxAsset');
     }
 
 
