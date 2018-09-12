@@ -32,11 +32,12 @@ class LazyfoxEngine {
     public static function produceSourceSet(array $srcset, Asset $asset, $transform) {
     	$imager = Imager::getInstance()->imager;
         $attr = [];
-        $asset = $asset->copyWithTransform($transform);
 
         foreach ($srcset as $size) {
-        	$a = $imager->transformImage($asset, [ 'width' => $size, 'format' => 'jpg', 'interlace' => 'line' ]);
-            // $t = static::getScaledDownTransform($transform, ceil($size));
+        	$t = static::getScaledDownTransform($transform, ceil($size));
+        	$t['interlace'] = 'plane';
+        	
+        	$a = $imager->transformImage($asset, $t);
             $url = Craft::getAlias('@web' . $a->getUrl());
             $attr[] = $url . ' ' . $size . 'w';
         }
