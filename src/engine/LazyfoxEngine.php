@@ -32,6 +32,7 @@ class LazyfoxEngine {
     public static function produceSourceSet(array $srcset, Asset $asset, $transform) {
     	$imager = Imager::getInstance()->imager;
         $attr = [];
+        $asset = $asset->copyWithTransform($asset);
 
         foreach ($srcset as $size) {
         	$a = $imager->transformImage($asset, [ 'width' => $size, 'format' => 'jpg', 'interlace' => 'line' ]);
