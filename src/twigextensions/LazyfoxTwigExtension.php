@@ -89,7 +89,7 @@ class LazyfoxTwigExtension extends \Twig_Extension
         $sizes = LazyfoxEngine::getSourceSet($settings, max($w, $h));
         $srcset = LazyfoxEngine::produceSourceSet($sizes, $asset, $transform);
 
-        $classes = " --no-progress --transition --sized --$previewType";
+        $classes = " --transition --sized --$previewType";
 
         echo 
            '<picture class="lazyfox --not-loaded' . $classes . '" data-type="' . $previewType . '">
