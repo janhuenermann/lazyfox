@@ -10,6 +10,8 @@ export class lazyfox {
 		this.done = false
 
 		el._lf = (el.lazyfox = this)
+
+		delete this.container.dataset.type;
 	}
 
 	activate(autoSize) {

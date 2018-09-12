@@ -294,6 +294,7 @@ function () {
     this.sizer = this.container.querySelector(".--sizer");
     this.done = false;
     el._lf = el.lazyfox = this;
+    delete this.container.dataset.type;
   }
 
   _createClass(lazyfox, [{
