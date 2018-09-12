@@ -5,6 +5,8 @@ A plugin that makes lazy loading your images a breeze.
 
 ![Screenshot](resources/img/lazyfox-screencap.gif)
 
+Icon attribution: Fox by ester barbato from the Noun Project.
+
 ## Key features
 
 - lazy load images to make web pages more responsive and fluid
@@ -37,16 +39,31 @@ If you want to install it manually however, follow these instructions.
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for lazyfox.
 
-## Configuring lazyfox
-
--Insert text here-
-
 ## Using lazyfox
 
 To make images lazy-load, simply use the `image` function in Twig.
 
 ### image(asset)
-Creates a picture tag enabled for lazy-loading.
+Creates a picture tag enabled for lazy-loading. Make sure that if you cache the result, that you still include the assets (JavaScript & CSS) required by LazyFox. You can do this in Twig using: 
+```twig
+{% do view.registerAssetBundle('janhuenermann\lazyfox\assetbundles\Lazyfox\LazyfoxAsset') %}
+```
+
+**Parameters:**
+**asset**: An instance of `craft\elements\Asset`
+
+**Example**:
+```twig
+<div class=my-images>
+{% for myImage in entry.myImageField %}
+{{ image(myImage) }}
+{% endfor %}
+</div>
+```
+
+## Configuring lazyfox
+
+
 
 ## Code output
 
@@ -82,3 +99,6 @@ main .lazyfox img {
 	object-fit: cover;
 }
 ```
+
+Plugin by [Jan Hünermann](https://janhuenermann.com)
+Icon attribution: Fox by ester barbato from the Noun Project
