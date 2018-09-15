@@ -4,8 +4,6 @@
 
 A dead simple plugin that makes lazy loading your images a breeze. Icon attribution: Fox by ester barbato from the Noun Project.
 
-![Screenshot](resources/img/lazyfox-screencap.gif)
-
 ## Key features
 
 - lazy load images to make web pages more responsive and fluid
@@ -18,6 +16,8 @@ A dead simple plugin that makes lazy loading your images a breeze. Icon attribut
 - [Imager](https://github.com/aelvan/Imager-Craft) support. Uses Imager for resizing when available.
 
 With LazyFox document jumping is a thing of the past!
+
+![Screenshot](resources/img/lazyfox-screencap.gif)
 
 ## Requirements
 
@@ -45,7 +45,8 @@ To make images lazy-load, simply use the `image` function in Twig.
 Creates a picture tag enabled for lazy-loading. 
 
 **Parameters:**
-**asset**: An instance of `craft\elements\Asset`
+
+_asset_: An instance of `craft\elements\Asset`
 
 **Example**:
 ```twig
