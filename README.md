@@ -2,11 +2,9 @@
 
 # LazyFox plugin for Craft CMS 3.x
 
-A dead simple plugin that makes lazy loading your images a breeze.
+A dead simple plugin that makes lazy loading your images a breeze. Icon attribution: Fox by ester barbato from the Noun Project.
 
 ![Screenshot](resources/img/lazyfox-screencap.gif)
-
-Icon attribution: Fox by ester barbato from the Noun Project.
 
 ## Key features
 
