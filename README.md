@@ -1,6 +1,6 @@
 <img src="resources/img/lazyfox-icon.png" height=80px>
 
-# LazyFox plugin for Craft CMS 3.x
+# LazyFox for Craft CMS 3.x
 
 A dead simple plugin that makes lazy loading your images a breeze. Icon attribution: Fox by ester barbato from the Noun Project.
 
@@ -15,7 +15,7 @@ A dead simple plugin that makes lazy loading your images a breeze. Icon attribut
 - uses the latest and greatest HTML5 and JS APIs such as MutationObserver, ResizeObserver and Intersection API. Has polyfills included.
 - lightweight: 7kB JavaScript, <1kB CSS
 - noscript fallback
-- [https://github.com/aelvan/Imager-Craft](Imager) support. Uses Imager for resizing when available.
+- [Imager](https://github.com/aelvan/Imager-Craft) support. Uses Imager for resizing when available.
 
 With LazyFox document jumping is a thing of the past!
 
@@ -25,9 +25,7 @@ This plugin requires Craft CMS 3.0.0-beta.23 or later.
 
 ## Installation
 
-It's recommended to install LazyFox from the Craft plugin store.
-
-If you want to install it manually however, follow these instructions.
+While it's recommended to install LazyFox from the Craft plugin store, if you want to, you can install it manually by following these instructions.
 
 1. Open your terminal and go to your Craft project:
 
@@ -44,10 +42,7 @@ If you want to install it manually however, follow these instructions.
 To make images lazy-load, simply use the `image` function in Twig.
 
 ### image(asset)
-Creates a picture tag enabled for lazy-loading. Make sure that if you cache the result, that you still include the assets (JavaScript & CSS) required by LazyFox. You can do this in Twig using: 
-```twig
-{% do view.registerAssetBundle('janhuenermann\lazyfox\assetbundles\Lazyfox\LazyfoxAsset') %}
-```
+Creates a picture tag enabled for lazy-loading. 
 
 **Parameters:**
 **asset**: An instance of `craft\elements\Asset`
@@ -60,6 +55,8 @@ Creates a picture tag enabled for lazy-loading. Make sure that if you cache the 
 {% endfor %}
 </div>
 ```
+
+**Note**: Make sure that if you cache the result, that you still include the assets (JavaScript & CSS) required by LazyFox. You can do this in Twig using `{% do view.registerAssetBundle('janhuenermann\lazyfox\assetbundles\Lazyfox\LazyfoxAsset') %}`
 
 ## Configuring lazyfox
 
@@ -100,5 +97,6 @@ main .lazyfox img {
 }
 ```
 
-Plugin by [Jan Hünermann](https://janhuenermann.com)
+Plugin by [Jan Hünermann](https://janhuenermann.com).
+
 Icon attribution: Fox by ester barbato from the Noun Project
