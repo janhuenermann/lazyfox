@@ -11,6 +11,8 @@ use Craft;
 use aelvan\imager\models\CraftTransformedImageModel;
 use aelvan\imager\Imager;
 
+define('LF_IMAGER_ENABLED', class_exists('aelvan\\imager\\Imager'));
+
 class LazyfoxEngine {
 
 	public static function getBase64($asset, $transform) {
@@ -21,7 +23,7 @@ class LazyfoxEngine {
 	        return sprintf('data:image/%s;base64,%s', $asset->getExtension(), base64_encode($binary));
 		}
 
-		else if ($asset instanceof CraftTransformedImageModel) {
+		else if (LF_IMAGER_ENABLED and $asset instanceof CraftTransformedImageModel) {
 			return $asset->getBase64Encoded();
 		}
 
@@ -30,15 +32,21 @@ class LazyfoxEngine {
 
 
     public static function produceSourceSet(array $srcset, Asset $asset, $transform) {
-    	$imager = Imager::getInstance()->imager;
+    	$imager = LF_IMAGER_ENABLED ? Imager::getInstance()->imager : NULL;
         $attr = [];
 
         foreach ($srcset as $size) {
         	$t = static::getScaledDownTransform($transform, ceil($size));
-        	$t['interlace'] = 'plane';
         	
-        	$a = $imager->transformImage($asset, $t);
-            $url = Craft::getAlias('@web' . $a->getUrl());
+        	if (LF_IMAGER_ENABLED) {
+        		$t['interlace'] = 'plane';
+        		$a = $imager->transformImage($asset, $t);
+        		$url = Craft::getAlias('@web' . $a->getUrl());
+        	}
+        	else {
+        		$url = $asset->getUrl($t);
+        	}
+        	
             $attr[] = $url . ' ' . $size . 'w';
         }
 
