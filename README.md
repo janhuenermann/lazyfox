@@ -16,6 +16,7 @@ Icon attribution: Fox by ester barbato from the Noun Project.
 - uses the latest and greatest HTML5 and JS APIs such as MutationObserver, ResizeObserver and Intersection API. Has polyfills included.
 - lightweight: 7kB JavaScript, <1kB CSS
 - noscript fallback
+- [https://github.com/aelvan/Imager-Craft](Imager) support. Uses Imager for resizing when available.
 
 With LazyFox document jumping is a thing of the past!
 
@@ -63,7 +64,7 @@ Creates a picture tag enabled for lazy-loading. Make sure that if you cache the 
 
 ## Configuring lazyfox
 
-
+On the settings page you can choose between different lazy load styles and set the image sizes included in the source-set (srcset attribute).
 
 ## Code output
 
