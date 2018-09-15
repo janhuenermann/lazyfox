@@ -1,4 +1,5 @@
 <img src="resources/img/lazyfox-icon.png" height=80px>
+
 # LazyFox plugin for Craft CMS 3.x
 
 A dead simple plugin that makes lazy loading your images a breeze.
