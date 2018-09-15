@@ -11,7 +11,7 @@ use Craft;
 use aelvan\imager\models\CraftTransformedImageModel;
 use aelvan\imager\Imager;
 
-define('LF_IMAGER_ENABLED', class_exists('aelvan\\imager\\Imager'));
+define('LF_IMAGER_ENABLED', class_exists('aelvan\\imager\\Imager') and Imager::getInstance() !== NULL);
 
 class LazyfoxEngine {
 
